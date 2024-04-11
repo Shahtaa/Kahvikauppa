@@ -17,6 +17,42 @@
         </ul>
       </nav>
     </div>
-    <!-- Content specific to tuotteet.html -->
+    <div>
+      <h2>Lisää uusi tuote</h2>
+      <form action="/lisaa-tuote" method="post">
+        <label for="nimi">Nimi:</label><br />
+        <input type="text" id="nimi" name="nimi" /><br />
+
+        <label for="kuvaus">Kuvaus:</label><br />
+        <textarea id="kuvaus" name="kuvaus"></textarea><br />
+
+        <label for="hinta">Hinta:</label><br />
+        <input type="text" id="hinta" name="hinta" /><br />
+
+        <label for="toimittaja">Toimittaja:</label><br />
+        <select id="toimittaja" name="toimittaja">
+          <option value="toimittaja1">Toimittaja 1</option>
+          <option value="toimittaja2">Toimittaja 2</option>
+          <!-- Lisää vaihtoehdot toimittajista tässä --></select
+        ><br />
+
+        <label for="valmistaja">Valmistaja:</label><br />
+        <select id="valmistaja" name="valmistaja">
+          <option value="valmistaja1">Valmistaja 1</option>
+          <option value="valmistaja2">Valmistaja 2</option>
+          <!-- Lisää vaihtoehdot valmistajista tässä --></select
+        ><br />
+
+        <label for="osasto">Osasto:</label><br />
+        <select id="osasto" name="osasto">
+          <option th:each="osasto : ${osastot}" th:value="${osasto.osastoIDP}">
+            Osasto <span th:text="${osasto.osastoIDP}"></span>:
+            <span th:text="${osasto.nimi}"></span>
+          </option></select
+        ><br />
+
+        <input type="submit" value="Lisää tuote" />
+      </form>
+    </div>
   </body>
 </html>
