@@ -1,13 +1,13 @@
 package com.example.Kahvikauppa.controller;
 
-import com.example.Kahvikauppa.model.Osasto;
-import com.example.Kahvikauppa.repository.OsastoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.example.Kahvikauppa.model.Osasto;
+import com.example.Kahvikauppa.repository.OsastoRepository;
 
 @Controller
 public class KahvikauppaController {
@@ -26,15 +26,14 @@ public class KahvikauppaController {
 
     @GetMapping("/osastot")
     public String osastot(Model model) {
-        model.addAttribute("osasto", new Osasto());
+        model.addAttribute("osastot", osastoRepository.findAll());
         return "osastot";
     }
 
     @PostMapping("/lisaa-osasto")
     public String lisaaOsasto(@ModelAttribute Osasto osasto) {
-        // Tallenna osasto tietokantaan
         osastoRepository.save(osasto);
-        return "redirect:/osastot"; // Ohjaa takaisin osastot-sivulle
+        return "redirect:/osastot";
     }
 
     @GetMapping("/kahvilaitteet")
