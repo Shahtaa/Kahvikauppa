@@ -38,5 +38,23 @@
         <input type="submit" value="Lisää toimittaja" />
       </form>
     </div>
+    <div>
+      <h2>Lisätyt toimittajat</h2>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Nimi</th>
+          <th>Yhteystieto</th>
+          <th>Yhteyshenkilon Email</th>
+        </tr>
+        <!-- Iterate over the list of suppliers and display them in table rows -->
+        <tr th:each="toimittaja : ${toimittajat}">
+          <td th:text="${toimittaja.id}"></td>
+          <td th:text="${toimittaja.nimi}"></td>
+          <td th:text="${toimittaja.yhteystieto}"></td>
+          <td th:text="${toimittaja.yhteyshenkilonEmail}"></td>
+        </tr>
+      </table>
+    </div>
   </body>
 </html>
