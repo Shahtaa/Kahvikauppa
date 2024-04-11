@@ -6,19 +6,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.example.Kahvikauppa.model.Osasto;
 import com.example.Kahvikauppa.model.Tuote;
+import com.example.Kahvikauppa.model.Toimittaja; // Import the Toimittaja class
 import com.example.Kahvikauppa.repository.OsastoRepository;
 import com.example.Kahvikauppa.repository.TuoteRepository;
+import com.example.Kahvikauppa.repository.ToimittajaRepository; // Import the ToimittajaRepository class
 
 @Controller
 public class KahvikauppaController {
 
     private final OsastoRepository osastoRepository;
     private final TuoteRepository tuoteRepository;
+    private final ToimittajaRepository toimittajaRepository; // Inject ToimittajaRepository
 
     @Autowired
-    public KahvikauppaController(OsastoRepository osastoRepository, TuoteRepository tuoteRepository) {
+    public KahvikauppaController(OsastoRepository osastoRepository, TuoteRepository tuoteRepository,
+            ToimittajaRepository toimittajaRepository) { // Update constructor to include ToimittajaRepository
         this.osastoRepository = osastoRepository;
         this.tuoteRepository = tuoteRepository;
+        this.toimittajaRepository = toimittajaRepository; // Initialize ToimittajaRepository
     }
 
     @GetMapping("/")
@@ -52,6 +57,7 @@ public class KahvikauppaController {
     public String tuotteet(Model model) {
         model.addAttribute("tuotteet", tuoteRepository.findAll());
         model.addAttribute("osastot", osastoRepository.findAll());
+        model.addAttribute("toimittajat", toimittajaRepository.findAll()); // Add suppliers to model
         return "tuotteet";
     }
 
@@ -85,7 +91,8 @@ public class KahvikauppaController {
     }
 
     @GetMapping("/toimittajat")
-    public String toimittajat() {
+    public String toimittajat(Model model) {
+        model.addAttribute("toimittajat", toimittajaRepository.findAll());
         return "toimittajat";
     }
 

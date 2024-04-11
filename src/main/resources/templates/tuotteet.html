@@ -29,11 +29,15 @@
         <label for="hinta">Hinta:</label><br />
         <input type="text" id="hinta" name="hinta" /><br />
 
+        <!-- Supplier dropdown menu -->
         <label for="toimittaja">Toimittaja:</label><br />
         <select id="toimittaja" name="toimittaja">
-          <option value="toimittaja1">Toimittaja 1</option>
-          <option value="toimittaja2">Toimittaja 2</option>
-          <!-- Lisää vaihtoehdot toimittajista tässä --></select
+          <option
+            th:each="toimittaja : ${toimittajat}"
+            th:value="${toimittaja.id}"
+          >
+            <span th:text="${toimittaja.nimi}"></span>
+          </option></select
         ><br />
 
         <label for="valmistaja">Valmistaja:</label><br />

@@ -14,8 +14,22 @@
           <li><a href="/osastot">Osastot</a></li>
           <li><a href="/kahvilaitteet">Kahvilaitteet</a></li>
           <li><a href="/kulutustuotteet">Kulutustuotteet</a></li>
+          <li><a href="/valmistajat">Valmistajat</a></li>
+          <li><a href="/toimittajat">Toimittajat</a></li>
         </ul>
       </nav>
+    </div>
+    <div>
+      <h2>Lisää uusi valmistaja</h2>
+      <form action="/lisaa-valmistaja" method="post">
+        <label for="nimi">Nimi:</label><br />
+        <input type="text" id="nimi" name="nimi" /><br />
+
+        <label for="yhteystiedot">Yhteystiedot:</label><br />
+        <textarea id="yhteystiedot" name="yhteystiedot"></textarea><br />
+
+        <input type="submit" value="Lisää valmistaja" />
+      </form>
     </div>
   </body>
 </html>
