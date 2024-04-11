@@ -45,4 +45,19 @@ public class KahvikauppaController {
     public String kulutustuotteet() {
         return "kulutustuotteet";
     }
+
+    @GetMapping("/tuotteet")
+    public String tuotteet() {
+        return "tuotteet";
+    }
+
+    @GetMapping("/toimittajat")
+    public String toimittajat() {
+        return "toimittajat";
+    }
+
+    @GetMapping("/valmistajat")
+    public String valmistajat() {
+        return "valmistajat";
+    }
 }
