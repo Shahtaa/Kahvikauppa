@@ -19,10 +19,17 @@
     </div>
     <div>
       <form action="/lisaa-osasto" method="post">
-        <label for="nimi">Osaston nimi:</label><br />
-        <input type="text" id="nimi" name="nimi" /><br />
-        <label for="osastoIDP">Osastoidp:</label><br />
-        <input type="number" id="osastoIDP" name="osastoIDP" /><br /><br />
+        <label for="nimi">Osaston nimi:</label>
+        <input type="text" id="nimi" name="nimi" th:required="required" /><br />
+        <label for="osastoIDP">Osastoidp (0-7):</label>
+        <input
+          type="number"
+          id="osastoIDP"
+          name="osastoIDP"
+          min="0"
+          max="7"
+          th:required="required"
+        />
         <input type="submit" value="Lisää osasto" />
       </form>
     </div>
@@ -33,7 +40,7 @@
           <tr>
             <th>ID</th>
             <th>Nimi</th>
-            <th>Osastoidp</th>
+            <th>osastoIDP</th>
           </tr>
           <tr th:each="osasto : ${osastot}">
             <td th:text="${osasto.id}"></td>
