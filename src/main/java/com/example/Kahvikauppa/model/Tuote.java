@@ -1,11 +1,7 @@
 package com.example.Kahvikauppa.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
-
 import java.math.BigDecimal;
 
 @Entity
@@ -21,5 +17,17 @@ public class Tuote {
     private String nimi;
     private String kuvaus;
     private BigDecimal hinta;
-    private String tuotekuva; // Assuming this can be a string representing the image (blob)
+    private String tuotekuva;
+
+    @ManyToOne
+    @JoinColumn(name = "toimittaja_id")
+    private Toimittaja toimittaja;
+
+    @ManyToOne
+    @JoinColumn(name = "valmistaja_id")
+    private Valmistaja valmistaja;
+
+    @ManyToOne
+    @JoinColumn(name = "osasto_id")
+    private Osasto osasto;
 }
