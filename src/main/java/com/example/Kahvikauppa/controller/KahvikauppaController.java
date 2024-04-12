@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import com.example.Kahvikauppa.model.Osasto;
 import com.example.Kahvikauppa.model.Tuote;
 import com.example.Kahvikauppa.model.Toimittaja;
-import com.example.Kahvikauppa.model.Valmistaja; // Import the Valmistaja class
+import com.example.Kahvikauppa.model.Valmistaja;
 import com.example.Kahvikauppa.repository.OsastoRepository;
 import com.example.Kahvikauppa.repository.TuoteRepository;
 import com.example.Kahvikauppa.repository.ToimittajaRepository;
-import com.example.Kahvikauppa.repository.ValmistajaRepository; // Import the ValmistajaRepository class
+import com.example.Kahvikauppa.repository.ValmistajaRepository;
 
 @Controller
 public class KahvikauppaController {
@@ -19,18 +19,15 @@ public class KahvikauppaController {
     private final OsastoRepository osastoRepository;
     private final TuoteRepository tuoteRepository;
     private final ToimittajaRepository toimittajaRepository;
-    private final ValmistajaRepository valmistajaRepository; // Inject ValmistajaRepository
+    private final ValmistajaRepository valmistajaRepository;
 
     @Autowired
     public KahvikauppaController(OsastoRepository osastoRepository, TuoteRepository tuoteRepository,
-            ToimittajaRepository toimittajaRepository, ValmistajaRepository valmistajaRepository) { // Update
-                                                                                                    // constructor to
-                                                                                                    // include
-                                                                                                    // ValmistajaRepository
+            ToimittajaRepository toimittajaRepository, ValmistajaRepository valmistajaRepository) {
         this.osastoRepository = osastoRepository;
         this.tuoteRepository = tuoteRepository;
         this.toimittajaRepository = toimittajaRepository;
-        this.valmistajaRepository = valmistajaRepository; // Initialize ValmistajaRepository
+        this.valmistajaRepository = valmistajaRepository;
     }
 
     @GetMapping("/")
@@ -65,7 +62,7 @@ public class KahvikauppaController {
         model.addAttribute("tuotteet", tuoteRepository.findAll());
         model.addAttribute("osastot", osastoRepository.findAll());
         model.addAttribute("toimittajat", toimittajaRepository.findAll());
-        model.addAttribute("valmistajat", valmistajaRepository.findAll()); // Add manufacturers to the model
+        model.addAttribute("valmistajat", valmistajaRepository.findAll());
         return "tuotteet";
     }
 
@@ -92,7 +89,7 @@ public class KahvikauppaController {
         return "redirect:/tuotteet";
     }
 
-    @GetMapping("/poista-tuote/{id}")
+    @PostMapping("/poista-tuote/{id}")
     public String poistaTuote(@PathVariable Long id) {
         tuoteRepository.deleteById(id);
         return "redirect:/tuotteet";
