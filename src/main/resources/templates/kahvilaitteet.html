@@ -15,17 +15,27 @@
         gap: 20px;
         padding: 10px; /* Add padding for spacing */
       }
+
       /* Style for each grid item */
       .grid-item {
         border: 1px solid #ccc; /* Add border to each grid item */
         padding: 10px; /* Add padding for spacing */
-        text-align: center; /* Center-align content */
+        display: flex; /* Use flexbox */
+        flex-direction: column; /* Stack children vertically */
+        justify-content: space-between; /* Distribute items with space between */
+        height: auto; /* Allow grid items to adjust height based on content */
       }
+
       /* Style for product images */
       .product-image {
         width: 100%;
         height: auto;
       }
+      .product-details {
+        border-top: 1px solid #ccc; /* Add border line to the top */
+        padding-top: 10px; /* Add padding to separate from image */
+      }
+      /* Style for product details */
     </style>
   </head>
   <body>
@@ -50,10 +60,15 @@
             th:src="@{/images/{imageName}(imageName=${tuote.tuotekuva})}"
             alt="Product Image"
           />
+        </div>
+        <div class="product-details">
           <!-- Display product name -->
           <h3 th:text="${tuote.nimi}"></h3>
           <!-- Display product price -->
-          <p th:text="${tuote.hinta}"></p>
+          <p>
+            <span th:text="${tuote.hinta}"></span>
+            <span>&euro;</span>
+          </p>
         </div>
       </div>
     </div>
