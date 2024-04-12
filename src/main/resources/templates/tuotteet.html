@@ -53,8 +53,8 @@
 
         <label for="osasto">Osasto:</label><br />
         <select id="osasto" name="osasto">
-          <option th:each="osasto : ${osastot}" th:value="${osasto.osastoIDP}">
-            Osasto <span th:text="${osasto.osastoIDP}"></span>:
+          <option th:each="osasto : ${osastot}" th:value="${osasto.id}">
+            Osasto <span th:text="${osasto.id}"></span>:
             <span th:text="${osasto.nimi}"></span>
           </option></select
         ><br />
