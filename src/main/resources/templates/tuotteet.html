@@ -21,17 +21,17 @@
       <h2>Lisää uusi tuote</h2>
       <form action="/lisaa-tuote" method="post">
         <label for="nimi">Nimi:</label><br />
-        <input type="text" id="nimi" name="nimi" /><br />
+        <input type="text" id="nimi" name="nimi" required /><br />
 
         <label for="kuvaus">Kuvaus:</label><br />
-        <textarea id="kuvaus" name="kuvaus"></textarea><br />
+        <textarea id="kuvaus" name="kuvaus" required></textarea><br />
 
         <label for="hinta">Hinta:</label><br />
-        <input type="text" id="hinta" name="hinta" /><br />
+        <input type="text" id="hinta" name="hinta" required /><br />
 
         <!-- Supplier dropdown menu -->
         <label for="toimittaja">Toimittaja:</label><br />
-        <select id="toimittaja" name="toimittaja">
+        <select id="toimittaja" name="toimittaja" required>
           <option
             th:each="toimittaja : ${toimittajat}"
             th:value="${toimittaja.id}"
@@ -41,7 +41,7 @@
         ><br />
 
         <label for="valmistaja">Valmistaja:</label><br />
-        <select id="valmistaja" name="valmistaja">
+        <select id="valmistaja" name="valmistaja" required>
           <!-- Iterate over the list of manufacturers and populate the options dynamically -->
           <option
             th:each="valmistaja : ${valmistajat}"
@@ -52,7 +52,7 @@
         ><br />
 
         <label for="osasto">Osasto:</label><br />
-        <select id="osasto" name="osasto">
+        <select id="osasto" name="osasto" required>
           <option th:each="osasto : ${osastot}" th:value="${osasto.id}">
             Osasto <span th:text="${osasto.id}"></span>:
             <span th:text="${osasto.nimi}"></span>
@@ -61,6 +61,32 @@
 
         <input type="submit" value="Lisää tuote" />
       </form>
+    </div>
+    <div>
+      <h2>Tuotteet</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nimi</th>
+            <th>Kuvaus</th>
+            <th>Hinta</th>
+            <th>Toimittaja</th>
+            <th>Valmistaja</th>
+            <th>Osasto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Iterate over the list of products and display them in table rows -->
+          <tr th:each="tuote : ${tuotteet}">
+            <td th:text="${tuote.nimi}"></td>
+            <td th:text="${tuote.kuvaus}"></td>
+            <td th:text="${tuote.hinta}"></td>
+            <td th:text="${tuote.toimittaja.nimi}"></td>
+            <td th:text="${tuote.valmistaja.nimi}"></td>
+            <td th:text="${tuote.osasto.nimi}"></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </body>
 </html>

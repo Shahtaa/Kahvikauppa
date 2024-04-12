@@ -23,16 +23,17 @@
       <h2>Lisää uusi toimittaja</h2>
       <form action="/lisaa-toimittaja" method="post">
         <label for="nimi">Nimi:</label><br />
-        <input type="text" id="nimi" name="nimi" /><br />
+        <input type="text" id="nimi" name="nimi" required /><br />
 
         <label for="yhteystieto">Yhteystieto:</label><br />
-        <input type="text" id="yhteystieto" name="yhteystieto" /><br />
+        <input type="text" id="yhteystieto" name="yhteystieto" required /><br />
 
         <label for="yhteyshenkilonEmail">Yhteyshenkilon Email:</label><br />
         <input
           type="email"
           id="yhteyshenkilonEmail"
           name="yhteyshenkilonEmail"
+          required
         /><br />
 
         <input type="submit" value="Lisää toimittaja" />
