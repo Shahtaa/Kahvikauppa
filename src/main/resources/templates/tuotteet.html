@@ -42,9 +42,13 @@
 
         <label for="valmistaja">Valmistaja:</label><br />
         <select id="valmistaja" name="valmistaja">
-          <option value="valmistaja1">Valmistaja 1</option>
-          <option value="valmistaja2">Valmistaja 2</option>
-          <!-- Lisää vaihtoehdot valmistajista tässä --></select
+          <!-- Iterate over the list of manufacturers and populate the options dynamically -->
+          <option
+            th:each="valmistaja : ${valmistajat}"
+            th:value="${valmistaja.id}"
+          >
+            <span th:text="${valmistaja.nimi}"></span>
+          </option></select
         ><br />
 
         <label for="osasto">Osasto:</label><br />

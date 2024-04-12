@@ -65,6 +65,7 @@ public class KahvikauppaController {
         model.addAttribute("tuotteet", tuoteRepository.findAll());
         model.addAttribute("osastot", osastoRepository.findAll());
         model.addAttribute("toimittajat", toimittajaRepository.findAll());
+        model.addAttribute("valmistajat", valmistajaRepository.findAll()); // Add manufacturers to the model
         return "tuotteet";
     }
 
