@@ -8,12 +8,18 @@
       /* CSS for grid layout */
       .grid-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(calc(33.33% - 20px), 1fr)
+        ); /* Calculate width for 3 items per row with gap */
         gap: 20px;
+        padding: 10px; /* Add padding for spacing */
       }
-      /* Style for table headers */
-      th {
-        text-align: left;
+      /* Style for each grid item */
+      .grid-item {
+        border: 1px solid #ccc; /* Add border to each grid item */
+        padding: 10px; /* Add padding for spacing */
+        text-align: center; /* Center-align content */
       }
       /* Style for product images */
       .product-image {
@@ -36,7 +42,7 @@
     </div>
     <div class="grid-container">
       <!-- Iterate over the list of coffee equipment products -->
-      <div th:each="tuote : ${tuotteet}">
+      <div th:each="tuote : ${tuotteet}" class="grid-item">
         <div>
           <!-- Display product image -->
           <img
