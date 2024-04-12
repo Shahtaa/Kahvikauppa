@@ -4,6 +4,23 @@
     <meta charset="UTF-8" />
     <title>Kahvilaitteet</title>
     <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <style>
+      /* CSS for grid layout */
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      /* Style for table headers */
+      th {
+        text-align: left;
+      }
+      /* Style for product images */
+      .product-image {
+        width: 100%;
+        height: auto;
+      }
+    </style>
   </head>
   <body>
     <div>
@@ -17,6 +34,22 @@
         </ul>
       </nav>
     </div>
-    <!-- Content specific to kahvilaitteet.html -->
+    <div class="grid-container">
+      <!-- Iterate over the list of coffee equipment products -->
+      <div th:each="tuote : ${tuotteet}">
+        <div>
+          <!-- Display product image -->
+          <img
+            class="product-image"
+            th:src="@{/images/{imageName}(imageName=${tuote.tuotekuva})}"
+            alt="Product Image"
+          />
+          <!-- Display product name -->
+          <h3 th:text="${tuote.nimi}"></h3>
+          <!-- Display product price -->
+          <p th:text="${tuote.hinta}"></p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
