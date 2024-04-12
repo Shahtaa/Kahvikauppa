@@ -1,5 +1,8 @@
 package com.example.Kahvikauppa.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,7 +51,9 @@ public class KahvikauppaController {
     }
 
     @GetMapping("/kahvilaitteet")
-    public String kahvilaitteet() {
+    public String kahvilaitteet(Model model) {
+        List<Tuote> filteredTuotteet = tuoteRepository.findByOsastoIdIn(Arrays.asList(1L, 3L, 4L, 5L));
+        model.addAttribute("tuotteet", filteredTuotteet);
         return "kahvilaitteet";
     }
 
