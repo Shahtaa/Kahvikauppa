@@ -25,11 +25,27 @@
         <label for="nimi">Nimi:</label><br />
         <input type="text" id="nimi" name="nimi" /><br />
 
-        <label for="yhteystiedot">Yhteystiedot:</label><br />
-        <textarea id="yhteystiedot" name="yhteystiedot"></textarea><br />
+        <label for="url">URL:</label><br />
+        <input type="text" id="url" name="url" /><br />
 
         <input type="submit" value="Lisää valmistaja" />
       </form>
+    </div>
+    <div>
+      <h2>Lisätyt valmistajat</h2>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Nimi</th>
+          <th>URL</th>
+        </tr>
+        <!-- Iterate over the list of manufacturers and display them in table rows -->
+        <tr th:each="valmistaja : ${valmistajat}">
+          <td th:text="${valmistaja.id}"></td>
+          <td th:text="${valmistaja.nimi}"></td>
+          <td th:text="${valmistaja.url}"></td>
+        </tr>
+      </table>
     </div>
   </body>
 </html>

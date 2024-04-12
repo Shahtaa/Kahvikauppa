@@ -6,24 +6,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.example.Kahvikauppa.model.Osasto;
 import com.example.Kahvikauppa.model.Tuote;
-import com.example.Kahvikauppa.model.Toimittaja; // Import the Toimittaja class
+import com.example.Kahvikauppa.model.Toimittaja;
+import com.example.Kahvikauppa.model.Valmistaja; // Import the Valmistaja class
 import com.example.Kahvikauppa.repository.OsastoRepository;
 import com.example.Kahvikauppa.repository.TuoteRepository;
-import com.example.Kahvikauppa.repository.ToimittajaRepository; // Import the ToimittajaRepository class
+import com.example.Kahvikauppa.repository.ToimittajaRepository;
+import com.example.Kahvikauppa.repository.ValmistajaRepository; // Import the ValmistajaRepository class
 
 @Controller
 public class KahvikauppaController {
 
     private final OsastoRepository osastoRepository;
     private final TuoteRepository tuoteRepository;
-    private final ToimittajaRepository toimittajaRepository; // Inject ToimittajaRepository
+    private final ToimittajaRepository toimittajaRepository;
+    private final ValmistajaRepository valmistajaRepository; // Inject ValmistajaRepository
 
     @Autowired
     public KahvikauppaController(OsastoRepository osastoRepository, TuoteRepository tuoteRepository,
-            ToimittajaRepository toimittajaRepository) { // Update constructor to include ToimittajaRepository
+            ToimittajaRepository toimittajaRepository, ValmistajaRepository valmistajaRepository) { // Update
+                                                                                                    // constructor to
+                                                                                                    // include
+                                                                                                    // ValmistajaRepository
         this.osastoRepository = osastoRepository;
         this.tuoteRepository = tuoteRepository;
-        this.toimittajaRepository = toimittajaRepository; // Initialize ToimittajaRepository
+        this.toimittajaRepository = toimittajaRepository;
+        this.valmistajaRepository = valmistajaRepository; // Initialize ValmistajaRepository
     }
 
     @GetMapping("/")
@@ -57,7 +64,7 @@ public class KahvikauppaController {
     public String tuotteet(Model model) {
         model.addAttribute("tuotteet", tuoteRepository.findAll());
         model.addAttribute("osastot", osastoRepository.findAll());
-        model.addAttribute("toimittajat", toimittajaRepository.findAll()); // Add suppliers to model
+        model.addAttribute("toimittajat", toimittajaRepository.findAll());
         return "tuotteet";
     }
 
@@ -96,8 +103,67 @@ public class KahvikauppaController {
         return "toimittajat";
     }
 
+    @PostMapping("/lisaa-toimittaja")
+    public String lisaaToimittaja(@ModelAttribute Toimittaja toimittaja) {
+        toimittajaRepository.save(toimittaja);
+        return "redirect:/toimittajat";
+    }
+
+    @GetMapping("/muokkaa-toimittaja/{id}")
+    public String muokkaaToimittaja(@PathVariable Long id, Model model) {
+        Toimittaja toimittaja = toimittajaRepository.findById(id).orElse(null);
+        if (toimittaja != null) {
+            model.addAttribute("toimittaja", toimittaja);
+            return "muokkaa-toimittaja";
+        } else {
+            return "redirect:/toimittajat";
+        }
+    }
+
+    @PostMapping("/paivita-toimittaja")
+    public String paivitaToimittaja(@ModelAttribute Toimittaja toimittaja) {
+        toimittajaRepository.save(toimittaja);
+        return "redirect:/toimittajat";
+    }
+
+    @GetMapping("/poista-toimittaja/{id}")
+    public String poistaToimittaja(@PathVariable Long id) {
+        toimittajaRepository.deleteById(id);
+        return "redirect:/toimittajat";
+    }
+
     @GetMapping("/valmistajat")
-    public String valmistajat() {
+    public String valmistajat(Model model) {
+        model.addAttribute("valmistajat", valmistajaRepository.findAll());
         return "valmistajat";
+    }
+
+    @PostMapping("/lisaa-valmistaja")
+    public String lisaaValmistaja(@ModelAttribute Valmistaja valmistaja) {
+        valmistajaRepository.save(valmistaja);
+        return "redirect:/valmistajat";
+    }
+
+    @GetMapping("/muokkaa-valmistaja/{id}")
+    public String muokkaaValmistaja(@PathVariable Long id, Model model) {
+        Valmistaja valmistaja = valmistajaRepository.findById(id).orElse(null);
+        if (valmistaja != null) {
+            model.addAttribute("valmistaja", valmistaja);
+            return "muokkaa-valmistaja";
+        } else {
+            return "redirect:/valmistajat";
+        }
+    }
+
+    @PostMapping("/paivita-valmistaja")
+    public String paivitaValmistaja(@ModelAttribute Valmistaja valmistaja) {
+        valmistajaRepository.save(valmistaja);
+        return "redirect:/valmistajat";
+    }
+
+    @GetMapping("/poista-valmistaja/{id}")
+    public String poistaValmistaja(@PathVariable Long id) {
+        valmistajaRepository.deleteById(id);
+        return "redirect:/valmistajat";
     }
 }
