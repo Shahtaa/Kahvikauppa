@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
@@ -79,11 +78,8 @@ public class KahvikauppaController {
     public String lisaaTuote(@ModelAttribute Tuote tuote, @RequestParam("kuva") MultipartFile file) throws IOException {
         // Check if the file is not empty
         if (!file.isEmpty()) {
-            // Set the byte array as the tuotekuva
-            tuote.setTuotekuva(file.getBytes());
-
-            // Save the file content
-            tuoteService.saveFileContent(file);
+            // Save the file content and update the Tuote object
+            tuoteService.saveFileContent(file, tuote);
         }
 
         // Save the Tuote object

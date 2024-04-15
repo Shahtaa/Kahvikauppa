@@ -1,18 +1,17 @@
 package com.example.Kahvikauppa.service;
 
-import com.example.Kahvikauppa.model.Tuote;
+// TuoteService.javaimport com.example.Kahvikauppa.model.Tuote;
 import com.example.Kahvikauppa.repository.TuoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import com.example.Kahvikauppa.model.Tuote;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class TuoteService {
@@ -32,7 +31,7 @@ public class TuoteService {
         tuoteRepository.save(tuote);
     }
 
-    public void saveFileContent(MultipartFile file) throws IOException {
+    public void saveFileContent(MultipartFile file, Tuote tuote) throws IOException {
         // Check if the file is not empty
         if (!file.isEmpty()) {
             // Define the directory path where you want to save the file
@@ -54,6 +53,9 @@ public class TuoteService {
 
             // Write the file content to the specified path
             Files.write(filePath, file.getBytes());
+
+            // Set the filename to the Tuote object
+            tuote.setTuotekuva(originalFileName);
         }
     }
 
@@ -69,5 +71,4 @@ public class TuoteService {
     public Tuote findTuoteById(Long id) {
         return tuoteRepository.findById(id).orElse(null);
     }
-
 }

@@ -19,7 +19,7 @@ public class Tuote {
     private BigDecimal hinta;
 
     @Lob
-    private byte[] tuotekuva;
+    private String tuotekuva; // Tallentaa tuotekuvan base64-muodossa
 
     @ManyToOne
     @JoinColumn(name = "toimittaja_id")
@@ -32,5 +32,4 @@ public class Tuote {
     @ManyToOne
     @JoinColumn(name = "osasto_id")
     private Osasto osasto;
-
 }

@@ -31,10 +31,12 @@
         width: 100%;
         height: auto;
       }
+
       .product-details {
         border-top: 1px solid #ccc; /* Add border line to the top */
         padding-top: 10px; /* Add padding to separate from image */
       }
+
       /* Style for product details */
     </style>
   </head>
@@ -55,12 +57,19 @@
       <div th:each="tuote : ${tuotteet}" class="grid-item">
         <div>
           <!-- Display product image -->
-          <img
-            class="product-image"
-            th:src="@{/images/{imageName}(imageName=${tuote.tuotekuva})}"
-            alt="Product Image"
-          />
+          <div>
+            <!-- Display product image -->
+            <div>
+              <!-- Display product image -->
+              <img
+                class="product-image"
+                th:src="@{'/images/' + ${tuote.tuotekuva}}"
+                alt="Product Image"
+              />
+            </div>
+          </div>
         </div>
+
         <div class="product-details">
           <!-- Display product name -->
           <h3 th:text="${tuote.nimi}"></h3>
