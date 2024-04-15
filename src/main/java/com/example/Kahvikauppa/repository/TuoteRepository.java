@@ -1,9 +1,11 @@
 package com.example.Kahvikauppa.repository;
 
-import java.util.List;
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.Kahvikauppa.model.Tuote;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.List;
 
+@Repository
 public interface TuoteRepository extends JpaRepository<Tuote, Long> {
-    List<Tuote> findByOsastoIdIn(List<Long> osastoIds);
+    List<Tuote> findAllByOsastoIdIn(List<Long> osastoIds);
 }

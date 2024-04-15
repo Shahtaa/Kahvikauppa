@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,6 +19,14 @@ public class TuoteService {
         this.tuoteRepository = tuoteRepository;
     }
 
+    public List<Tuote> findAllTuotteet() {
+        return tuoteRepository.findAll();
+    }
+
+    public void saveTuote(Tuote tuote) {
+        tuoteRepository.save(tuote);
+    }
+
     public List<Tuote> getKahvilaitteet() {
         List<Tuote> allTuotteet = tuoteRepository.findAll();
         // Filter products with OSASTO_ID 1, 3, 4, and 5
@@ -28,4 +37,13 @@ public class TuoteService {
                         tuote.getOsasto().getId() == 5)
                 .collect(Collectors.toList());
     }
+
+    public void deleteTuote(Long tuoteId) {
+        tuoteRepository.deleteById(tuoteId);
+    }
+
+    public Tuote findTuoteById(Long id) {
+        return tuoteRepository.findById(id).orElse(null);
+    }
+
 }

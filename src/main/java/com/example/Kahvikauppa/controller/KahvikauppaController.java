@@ -1,36 +1,36 @@
 package com.example.Kahvikauppa.controller;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 import com.example.Kahvikauppa.model.Osasto;
 import com.example.Kahvikauppa.model.Tuote;
 import com.example.Kahvikauppa.model.Toimittaja;
 import com.example.Kahvikauppa.model.Valmistaja;
-import com.example.Kahvikauppa.repository.OsastoRepository;
-import com.example.Kahvikauppa.repository.TuoteRepository;
-import com.example.Kahvikauppa.repository.ToimittajaRepository;
-import com.example.Kahvikauppa.repository.ValmistajaRepository;
+import com.example.Kahvikauppa.service.OsastoService;
+import com.example.Kahvikauppa.service.TuoteService;
+import com.example.Kahvikauppa.service.ToimittajaService;
+import com.example.Kahvikauppa.service.ValmistajaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class KahvikauppaController {
 
-    private final OsastoRepository osastoRepository;
-    private final TuoteRepository tuoteRepository;
-    private final ToimittajaRepository toimittajaRepository;
-    private final ValmistajaRepository valmistajaRepository;
+    private final OsastoService osastoService;
+    private final TuoteService tuoteService;
+    private final ToimittajaService toimittajaService;
+    private final ValmistajaService valmistajaService;
 
     @Autowired
-    public KahvikauppaController(OsastoRepository osastoRepository, TuoteRepository tuoteRepository,
-            ToimittajaRepository toimittajaRepository, ValmistajaRepository valmistajaRepository) {
-        this.osastoRepository = osastoRepository;
-        this.tuoteRepository = tuoteRepository;
-        this.toimittajaRepository = toimittajaRepository;
-        this.valmistajaRepository = valmistajaRepository;
+    public KahvikauppaController(OsastoService osastoService, TuoteService tuoteService,
+            ToimittajaService toimittajaService, ValmistajaService valmistajaService) {
+        this.osastoService = osastoService;
+        this.tuoteService = tuoteService;
+        this.toimittajaService = toimittajaService;
+        this.valmistajaService = valmistajaService;
     }
 
     @GetMapping("/")
@@ -40,20 +40,21 @@ public class KahvikauppaController {
 
     @GetMapping("/osastot")
     public String osastot(Model model) {
-        model.addAttribute("osastot", osastoRepository.findAll());
+        List<Osasto> osastot = osastoService.findAllOsastot();
+        model.addAttribute("osastot", osastot);
         return "osastot";
     }
 
     @PostMapping("/lisaa-osasto")
     public String lisaaOsasto(@ModelAttribute Osasto osasto) {
-        osastoRepository.save(osasto);
+        osastoService.saveOsasto(osasto);
         return "redirect:/osastot";
     }
 
     @GetMapping("/kahvilaitteet")
     public String kahvilaitteet(Model model) {
-        List<Tuote> filteredTuotteet = tuoteRepository.findByOsastoIdIn(Arrays.asList(1L, 3L, 4L, 5L));
-        model.addAttribute("tuotteet", filteredTuotteet);
+        List<Tuote> kahvilaitteet = tuoteService.getKahvilaitteet();
+        model.addAttribute("tuotteet", kahvilaitteet);
         return "kahvilaitteet";
     }
 
@@ -64,22 +65,22 @@ public class KahvikauppaController {
 
     @GetMapping("/tuotteet")
     public String tuotteet(Model model) {
-        model.addAttribute("tuotteet", tuoteRepository.findAll());
-        model.addAttribute("osastot", osastoRepository.findAll());
-        model.addAttribute("toimittajat", toimittajaRepository.findAll());
-        model.addAttribute("valmistajat", valmistajaRepository.findAll());
+        model.addAttribute("tuotteet", tuoteService.findAllTuotteet());
+        model.addAttribute("osastot", osastoService.findAllOsastot());
+        model.addAttribute("toimittajat", toimittajaService.findAllToimittajat());
+        model.addAttribute("valmistajat", valmistajaService.findAllValmistajat());
         return "tuotteet";
     }
 
     @PostMapping("/lisaa-tuote")
     public String lisaaTuote(@ModelAttribute Tuote tuote) {
-        tuoteRepository.save(tuote);
+        tuoteService.saveTuote(tuote);
         return "redirect:/tuotteet";
     }
 
     @GetMapping("/muokkaa-tuote/{id}")
     public String muokkaaTuote(@PathVariable Long id, Model model) {
-        Tuote tuote = tuoteRepository.findById(id).orElse(null);
+        Tuote tuote = tuoteService.findTuoteById(id);
         if (tuote != null) {
             model.addAttribute("tuote", tuote);
             return "muokkaa-tuote";
@@ -90,31 +91,31 @@ public class KahvikauppaController {
 
     @PostMapping("/paivita-tuote")
     public String paivitaTuote(@ModelAttribute Tuote tuote) {
-        tuoteRepository.save(tuote);
+        tuoteService.saveTuote(tuote);
         return "redirect:/tuotteet";
     }
 
     @PostMapping("/poista-tuote/{id}")
     public String poistaTuote(@PathVariable Long id) {
-        tuoteRepository.deleteById(id);
+        tuoteService.deleteTuote(id);
         return "redirect:/tuotteet";
     }
 
     @GetMapping("/toimittajat")
     public String toimittajat(Model model) {
-        model.addAttribute("toimittajat", toimittajaRepository.findAll());
+        model.addAttribute("toimittajat", toimittajaService.findAllToimittajat());
         return "toimittajat";
     }
 
     @PostMapping("/lisaa-toimittaja")
     public String lisaaToimittaja(@ModelAttribute Toimittaja toimittaja) {
-        toimittajaRepository.save(toimittaja);
+        toimittajaService.saveToimittaja(toimittaja);
         return "redirect:/toimittajat";
     }
 
     @GetMapping("/muokkaa-toimittaja/{id}")
     public String muokkaaToimittaja(@PathVariable Long id, Model model) {
-        Toimittaja toimittaja = toimittajaRepository.findById(id).orElse(null);
+        Toimittaja toimittaja = toimittajaService.findToimittajaById(id);
         if (toimittaja != null) {
             model.addAttribute("toimittaja", toimittaja);
             return "muokkaa-toimittaja";
@@ -125,31 +126,31 @@ public class KahvikauppaController {
 
     @PostMapping("/paivita-toimittaja")
     public String paivitaToimittaja(@ModelAttribute Toimittaja toimittaja) {
-        toimittajaRepository.save(toimittaja);
+        toimittajaService.saveToimittaja(toimittaja);
         return "redirect:/toimittajat";
     }
 
-    @GetMapping("/poista-toimittaja/{id}")
+    @PostMapping("/poista-toimittaja/{id}")
     public String poistaToimittaja(@PathVariable Long id) {
-        toimittajaRepository.deleteById(id);
+        toimittajaService.deleteToimittaja(id);
         return "redirect:/toimittajat";
     }
 
     @GetMapping("/valmistajat")
     public String valmistajat(Model model) {
-        model.addAttribute("valmistajat", valmistajaRepository.findAll());
+        model.addAttribute("valmistajat", valmistajaService.findAllValmistajat());
         return "valmistajat";
     }
 
     @PostMapping("/lisaa-valmistaja")
     public String lisaaValmistaja(@ModelAttribute Valmistaja valmistaja) {
-        valmistajaRepository.save(valmistaja);
+        valmistajaService.saveValmistaja(valmistaja);
         return "redirect:/valmistajat";
     }
 
     @GetMapping("/muokkaa-valmistaja/{id}")
     public String muokkaaValmistaja(@PathVariable Long id, Model model) {
-        Valmistaja valmistaja = valmistajaRepository.findById(id).orElse(null);
+        Valmistaja valmistaja = valmistajaService.findValmistajaById(id);
         if (valmistaja != null) {
             model.addAttribute("valmistaja", valmistaja);
             return "muokkaa-valmistaja";
@@ -160,13 +161,13 @@ public class KahvikauppaController {
 
     @PostMapping("/paivita-valmistaja")
     public String paivitaValmistaja(@ModelAttribute Valmistaja valmistaja) {
-        valmistajaRepository.save(valmistaja);
+        valmistajaService.saveValmistaja(valmistaja);
         return "redirect:/valmistajat";
     }
 
-    @GetMapping("/poista-valmistaja/{id}")
+    @PostMapping("/poista-valmistaja/{id}")
     public String poistaValmistaja(@PathVariable Long id) {
-        valmistajaRepository.deleteById(id);
+        valmistajaService.deleteValmistaja(id);
         return "redirect:/valmistajat";
     }
 }
