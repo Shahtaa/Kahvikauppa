@@ -1,5 +1,3 @@
-/* styles.css */
-
 /* Navigation Styles */
 nav ul {
   padding: 0;
@@ -59,4 +57,23 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Added styles for lisaa-tuote form */
+.lisaa-tuote {
+  display: flex;
+  flex-direction: column;
+  max-width: 20%; /* Adjust as needed */
+}
+
+.lisaa-tuote label {
+  font-weight: bold;
+}
+
+/* Remove margin and padding from form elements */
+.lisaa-tuote input,
+.lisaa-tuote textarea,
+.lisaa-tuote select {
+  margin: 0;
+  padding: 8px;
 }

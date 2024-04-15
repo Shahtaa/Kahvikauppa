@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 @Controller
@@ -73,8 +76,19 @@ public class KahvikauppaController {
     }
 
     @PostMapping("/lisaa-tuote")
-    public String lisaaTuote(@ModelAttribute Tuote tuote) {
+    public String lisaaTuote(@ModelAttribute Tuote tuote, @RequestParam("kuva") MultipartFile file) throws IOException {
+        // Check if the file is not empty
+        if (!file.isEmpty()) {
+            // Set the byte array as the tuotekuva
+            tuote.setTuotekuva(file.getBytes());
+
+            // Save the file content
+            tuoteService.saveFileContent(file);
+        }
+
+        // Save the Tuote object
         tuoteService.saveTuote(tuote);
+
         return "redirect:/tuotteet";
     }
 

@@ -17,7 +17,9 @@ public class Tuote {
     private String nimi;
     private String kuvaus;
     private BigDecimal hinta;
-    private String tuotekuva;
+
+    @Lob
+    private byte[] tuotekuva;
 
     @ManyToOne
     @JoinColumn(name = "toimittaja_id")
@@ -30,4 +32,5 @@ public class Tuote {
     @ManyToOne
     @JoinColumn(name = "osasto_id")
     private Osasto osasto;
+
 }

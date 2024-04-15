@@ -4,11 +4,6 @@
     <meta charset="UTF-8" />
     <title>Tuotteet</title>
     <link rel="stylesheet" type="text/css" href="./styles.css" />
-    <script>
-      function confirmDelete() {
-        return confirm("Are you sure you want to delete this product?");
-      }
-    </script>
   </head>
   <body>
     <div>
@@ -23,7 +18,12 @@
       </nav>
     </div>
     <h2>Lisää uusi tuote</h2>
-    <form action="/lisaa-tuote" method="post">
+    <form
+      action="/lisaa-tuote"
+      method="post"
+      class="lisaa-tuote"
+      enctype="multipart/form-data"
+    >
       <label for="nimi">Nimi:</label><br />
       <input type="text" id="nimi" name="nimi" required /><br />
 
@@ -32,6 +32,15 @@
 
       <label for="hinta">Hinta:</label><br />
       <input type="text" id="hinta" name="hinta" required /><br />
+
+      <label for="kuva">Kuva:</label><br />
+      <input
+        type="file"
+        id="kuva"
+        name="kuva"
+        accept="image/*"
+        required
+      /><br />
 
       <!-- Supplier dropdown menu -->
       <label for="toimittaja">Toimittaja:</label><br />
@@ -46,7 +55,6 @@
 
       <label for="valmistaja">Valmistaja:</label><br />
       <select id="valmistaja" name="valmistaja" required>
-        <!-- Iterate over the list of manufacturers and populate the options dynamically -->
         <option
           th:each="valmistaja : ${valmistajat}"
           th:value="${valmistaja.id}"
