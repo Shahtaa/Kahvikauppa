@@ -35,7 +35,7 @@ public class TuoteService {
         // Check if the file is not empty
         if (!file.isEmpty()) {
             // Define the directory path where you want to save the file
-            String directoryPath = "Kahvikauppa/src/main/resources/static/images";
+            String directoryPath = "src/main/resources/static/images";
 
             // Create a Path object for the directory
             Path directory = Paths.get(directoryPath);

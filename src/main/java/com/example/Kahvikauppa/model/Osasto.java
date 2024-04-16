@@ -14,10 +14,12 @@ public class Osasto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Reference to the parent osasto
     private Long osastoIDP;
 
     private String nimi;
 
+    // Define the one-to-many relationship with Tuote
     @OneToMany(mappedBy = "osasto")
     private List<Tuote> tuotteet;
 }
