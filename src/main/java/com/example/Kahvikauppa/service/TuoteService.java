@@ -1,11 +1,11 @@
 package com.example.Kahvikauppa.service;
 
-// TuoteService.javaimport com.example.Kahvikauppa.model.Tuote;
+import com.example.Kahvikauppa.model.Tuote;
 import com.example.Kahvikauppa.repository.TuoteRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import com.example.Kahvikauppa.model.Tuote;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -59,9 +59,8 @@ public class TuoteService {
         }
     }
 
-    public List<Tuote> getKahvilaitteet() {
-        // Filter products with OSASTO_ID 1, 3, 4, and 5
-        return tuoteRepository.findAllByOsastoIdIn(List.of(1L, 3L, 4L, 5L));
+    public List<Tuote> getKahvilaitteet(Long osastoID) {
+        return tuoteRepository.findProductsByOsastoID(osastoID);
     }
 
     public void deleteTuote(Long tuoteId) {

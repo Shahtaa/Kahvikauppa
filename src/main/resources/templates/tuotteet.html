@@ -4,90 +4,6 @@
     <meta charset="UTF-8" />
     <title>Tuotteet</title>
     <link rel="stylesheet" type="text/css" href="./styles.css" />
-    <style>
-      .asc::after {
-        content: " ▲";
-      }
-
-      .desc::after {
-        content: " ▼";
-      }
-    </style>
-    <script>
-      function sortTable(columnIndex) {
-        var table,
-          rows,
-          switching,
-          i,
-          x,
-          y,
-          shouldSwitch,
-          dir,
-          switchcount = 0;
-        table = document.querySelector("table");
-        switching = true;
-        dir = "asc";
-        while (switching) {
-          switching = false;
-          rows = table.rows;
-          for (i = 1; i < rows.length - 1; i++) {
-            shouldSwitch = false;
-            x = rows[i].getElementsByTagName("TD")[columnIndex];
-            y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
-            if (dir == "asc") {
-              if (isNaN(x.innerHTML)) {
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                  shouldSwitch = true;
-                  break;
-                }
-              } else {
-                if (Number(x.innerHTML) > Number(y.innerHTML)) {
-                  shouldSwitch = true;
-                  break;
-                }
-              }
-            } else if (dir == "desc") {
-              if (isNaN(x.innerHTML)) {
-                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                  shouldSwitch = true;
-                  break;
-                }
-              } else {
-                if (Number(x.innerHTML) < Number(y.innerHTML)) {
-                  shouldSwitch = true;
-                  break;
-                }
-              }
-            }
-          }
-          if (shouldSwitch) {
-            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-            switching = true;
-            switchcount++;
-          } else {
-            if (switchcount == 0 && dir == "asc") {
-              dir = "desc";
-              switching = true;
-            }
-          }
-        }
-        toggleSortIcon(columnIndex, dir);
-      }
-
-      function toggleSortIcon(columnIndex, dir) {
-        var th = document.querySelectorAll("th");
-        th.forEach(function (el) {
-          el.classList.remove("asc", "desc");
-        });
-        if (dir == "asc") {
-          th[columnIndex].classList.remove("desc");
-          th[columnIndex].classList.add("asc");
-        } else if (dir == "desc") {
-          th[columnIndex].classList.remove("asc");
-          th[columnIndex].classList.add("desc");
-        }
-      }
-    </script>
   </head>
   <body>
     <div>
@@ -102,46 +18,96 @@
       </nav>
     </div>
     <h2>Lisää uusi tuote</h2>
-    <!-- Form for adding a new product -->
+    <form
+      action="/lisaa-tuote"
+      method="post"
+      class="lisaa-tuote"
+      enctype="multipart/form-data"
+    >
+      <label for="nimi">Nimi:</label><br />
+      <input type="text" id="nimi" name="nimi" required /><br />
+
+      <label for="kuvaus">Kuvaus:</label><br />
+      <textarea id="kuvaus" name="kuvaus" required></textarea><br />
+
+      <label for="hinta">Hinta:</label><br />
+      <input type="text" id="hinta" name="hinta" required /><br />
+
+      <label for="kuva">Kuva:</label><br />
+      <input
+        type="file"
+        id="kuva"
+        name="kuva"
+        accept="image/*"
+        required
+      /><br />
+
+      <!-- Supplier dropdown menu -->
+      <label for="toimittaja">Toimittaja:</label><br />
+      <select id="toimittaja" name="toimittaja" required>
+        <option
+          th:each="toimittaja : ${toimittajat}"
+          th:value="${toimittaja.id}"
+        >
+          <span th:text="${toimittaja.nimi}"></span>
+        </option></select
+      ><br />
+
+      <label for="valmistaja">Valmistaja:</label><br />
+      <select id="valmistaja" name="valmistaja" required>
+        <option
+          th:each="valmistaja : ${valmistajat}"
+          th:value="${valmistaja.id}"
+        >
+          <span th:text="${valmistaja.nimi}"></span>
+        </option></select
+      ><br />
+
+      <label for="osasto">Osasto:</label><br />
+      <select id="osasto" name="osasto" required>
+        <option th:each="osasto : ${osastot}" th:value="${osasto.id}">
+          Osasto <span th:text="${osasto.id}"></span>:
+          <span th:text="${osasto.nimi}"></span>
+        </option></select
+      ><br />
+
+      <input type="submit" value="Lisää tuote" />
+    </form>
     <div>
       <h2>Tuotteet</h2>
       <table>
-        <thead>
-          <tr>
-            <!-- Table headers with sorting onclick event -->
-            <th onclick="sortTable(0)">ID</th>
-            <th onclick="sortTable(1)">Nimi</th>
-            <th onclick="sortTable(2)">Kuvaus</th>
-            <th onclick="sortTable(3)">Hinta</th>
-            <th onclick="sortTable(4)">Toimittaja</th>
-            <th onclick="sortTable(5)">Valmistaja</th>
-            <th onclick="sortTable(6)">Osasto</th>
-            <th>Toiminnot</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Iterate over the list of products and display them in table rows -->
-          <tr th:each="tuote : ${tuotteet}">
-            <td th:text="${tuote.id}"></td>
-            <td th:text="${tuote.nimi}"></td>
-            <td th:text="${tuote.kuvaus}"></td>
-            <td th:text="${tuote.hinta}"></td>
-            <td th:text="${tuote.toimittaja.nimi}"></td>
-            <td th:text="${tuote.valmistaja.nimi}"></td>
-            <td th:text="${tuote.osasto.nimi}"></td>
-            <td>
-              <!-- Delete button with confirmation -->
-              <form
-                th:action="@{/poista-tuote/{id}(id=${tuote.id})}"
-                method="post"
-                onsubmit="return confirmDelete()"
-              >
-                <input type="hidden" name="tuoteId" th:value="${tuote.id}" />
-                <input type="submit" value="Poista" />
-              </form>
-            </td>
-          </tr>
-        </tbody>
+        <tr>
+          <th>ID</th>
+          <th>Nimi</th>
+          <th>Kuvaus</th>
+          <th>Hinta</th>
+          <th>Toimittaja</th>
+          <th>Valmistaja</th>
+          <th>Osasto</th>
+          <th>Toiminnot</th>
+        </tr>
+
+        <!-- Iterate over the list of products and display them in table rows -->
+        <tr th:each="tuote : ${tuotteet}">
+          <td th:text="${tuote.id}"></td>
+          <td th:text="${tuote.nimi}"></td>
+          <td th:text="${tuote.kuvaus}"></td>
+          <td th:text="${tuote.hinta}"></td>
+          <td th:text="${tuote.toimittaja.nimi}"></td>
+          <td th:text="${tuote.valmistaja.nimi}"></td>
+          <td th:text="${tuote.osasto.nimi}"></td>
+          <td>
+            <!-- Delete button with confirmation -->
+            <form
+              th:action="@{/poista-tuote/{id}(id=${tuote.id})}"
+              method="post"
+              onsubmit="return confirmDelete()"
+            >
+              <input type="hidden" name="tuoteId" th:value="${tuote.id}" />
+              <input type="submit" value="Poista" />
+            </form>
+          </td>
+        </tr>
       </table>
     </div>
   </body>

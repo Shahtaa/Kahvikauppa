@@ -2,6 +2,8 @@ package com.example.Kahvikauppa.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,5 +23,5 @@ public class Osasto {
 
     // Define the one-to-many relationship with Tuote
     @OneToMany(mappedBy = "osasto")
-    private List<Tuote> tuotteet;
+    private List<Tuote> tuotteet = new ArrayList<>();
 }

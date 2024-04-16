@@ -54,9 +54,9 @@ public class KahvikauppaController {
     }
 
     @GetMapping("/kahvilaitteet")
-    public String kahvilaitteet(Model model) {
-        List<Tuote> kahvilaitteet = tuoteService.getKahvilaitteet();
-        model.addAttribute("tuotteet", kahvilaitteet);
+    public String getKahvilaitteet(Model model) {
+        List<Tuote> kahvilaitteet = tuoteService.getKahvilaitteet(1L); // Fetch products for osasto ID 1
+        model.addAttribute("kahvilaitteet", kahvilaitteet);
         return "kahvilaitteet";
     }
 

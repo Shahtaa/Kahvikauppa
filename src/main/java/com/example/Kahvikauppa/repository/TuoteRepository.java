@@ -2,10 +2,13 @@ package com.example.Kahvikauppa.repository;
 
 import com.example.Kahvikauppa.model.Tuote;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import java.util.List;
 
-@Repository
 public interface TuoteRepository extends JpaRepository<Tuote, Long> {
-    List<Tuote> findAllByOsastoIdIn(List<Long> osastoIds);
+
+    @Query("SELECT t FROM Tuote t WHERE t.osasto.id = :osastoID OR t.osasto.osastoIDP = :osastoID")
+    List<Tuote> findProductsByOsastoID(@Param("osastoID") Long osastoID);
 }
