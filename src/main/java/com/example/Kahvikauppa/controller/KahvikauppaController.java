@@ -1,5 +1,6 @@
 package com.example.Kahvikauppa.controller;
 
+import org.springframework.http.MediaType;
 import com.example.Kahvikauppa.model.Osasto;
 import com.example.Kahvikauppa.model.Tuote;
 import com.example.Kahvikauppa.model.Toimittaja;
@@ -9,6 +10,9 @@ import com.example.Kahvikauppa.service.TuoteService;
 import com.example.Kahvikauppa.service.ToimittajaService;
 import com.example.Kahvikauppa.service.ValmistajaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -74,16 +78,22 @@ public class KahvikauppaController {
         return "tuotteet";
     }
 
+    @GetMapping("/productImage/{id}")
+    public ResponseEntity<byte[]> getProductImage(@PathVariable Long id) {
+        Tuote product = tuoteService.findTuoteById(id);
+        if (product != null && product.getTuotekuva() != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+            return new ResponseEntity<>(product.getTuotekuva(), headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping("/lisaa-tuote")
     public String lisaaTuote(@ModelAttribute Tuote tuote, @RequestParam("kuva") MultipartFile file) throws IOException {
-        // Check if the file is not empty
-        if (!file.isEmpty()) {
-            // Save the file content and update the Tuote object
-            tuoteService.saveFileContent(file, tuote);
-        }
-
-        // Save the Tuote object
-        tuoteService.saveTuote(tuote);
+        // Save the Tuote object along with the file content
+        tuoteService.saveTuote(tuote, file);
 
         return "redirect:/tuotteet";
     }

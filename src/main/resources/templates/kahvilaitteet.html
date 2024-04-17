@@ -57,17 +57,11 @@
       <div th:each="tuote : ${kahvilaitteet}" class="grid-item">
         <div>
           <!-- Display product image -->
-          <div>
-            <!-- Display product image -->
-            <div>
-              <!-- Display product image -->
-              <img
-                class="product-image"
-                th:src="@{'/images/' + ${tuote.tuotekuva}}"
-                alt="Product Image"
-              />
-            </div>
-          </div>
+          <img
+            class="product-image"
+            th:src="@{'/productImage/' + ${tuote.id}}"
+            alt="Product Image"
+          />
         </div>
 
         <div class="product-details">
