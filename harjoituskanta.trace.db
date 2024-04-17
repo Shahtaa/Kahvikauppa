@@ -1186,3 +1186,175 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection wa
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 90 more
+2024-04-17 14:44:12.353458+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "-- Assigned to Coffee Grinders\000d\000a([*]49.99, 'High-Quality Coffee Scale', 'coffee_scale.jpg', 6, 7, 3), -- Assigned to Coffee Filters\000d\000a(13.00, 'Test Coffee Filter', 'test_product.jpg', 6, 11, 11), -- Assigned to Coffee Filters\000d\000a(29.99, 'Filtered Coffee Pack', 'filtered_coffee_pack.jpg', 7, 12, 12), -- Assigned to Filtered Coffee\000d\000a(99.99, 'Espresso Pack', 'espresso_pack.jpg', 8, 13, 13), -- Assigned to Espresso\000d\000a(8.99, 'Filtered Coffee Pack 2', 'filtered_coffee_pack_2.jpg', 9, 14, 14)"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+-- Assigned to Coffee Grinders
+(49.99, 'High-Quality Coffee Scale', 'coffee_scale.jpg', 6, 7, 3), -- Assigned to Coffee Filters
+(13.00, 'Test Coffee Filter', 'test_product.jpg', 6, 11, 11), -- Assigned to Coffee Filters
+(29.99, 'Filtered Coffee Pack', 'filtered_coffee_pack.jpg', 7, 12, 12), -- Assigned to Filtered Coffee
+(99.99, 'Espresso Pack', 'espresso_pack.jpg', 8, 13, 13), -- Assigned to Espresso
+(8.99, 'Filtered Coffee Pack 2', 'filtered_coffee_pack_2.jpg', 9, 14, 14) [42001-224]
+2024-04-17 14:46:38.727680+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "([*]79.99, 'Professional espresso machine for cafes', 'Commercial Espresso Machine', 'commercial_espresso_machine.jpg', 3, 6, 1), -- Assigned to Espresso Equipment\000d\000a(34.99, 'Stylish and durable coffee maker with glass carafe', 'Glass Carafe Coffee Maker', 'glass_carafe_coffee_maker.jpg', 3, 8, 5), -- Assigned to Espresso Equipment\000d\000a(49.99, 'High-quality coffee scale with precision measurement', 'Coffee Scale', 'coffee_scale.jpg', 4, 7, 3), -- Assigned to Coffee Filters\000d\000a(64.99, 'Automatic pour-over coffee maker with temperature control', 'Pour-Over Coffee Maker', 'pour_over_coffee_maker.jpg', 3, 2, 4), -- Assigned to Espresso Equipment\000d\000a(19.99, 'Stylish coffee storage canister for keeping beans fresh', 'Coffee Storage Canister', 'coffee_storage_canister.jpg', 4, 3, 7), -- Assigned to Coffee Filters\000d\000a(9.99, 'Premium coffee grinder for home use', 'Home Coffee Grinder', 'home_coffee_grinder.jpg', 5, 5, 2), -- Assigned to Coffee Grinders\000d\000a(49.99, 'High-Quality Coffee Scale', 'coffee_scale.jpg', 6, 7, 3), -- Assigned to Coffee Filters\000d\000a(13.00, 'Test Coffee Filter', 'test_product.jpg', 6, 11, 11), -- Assigned to Coffee Filters\000d\000a(29.99, 'Filtered Coffee Pack', 'filtered_coffee_pack.jpg', 7, 12, 12), -- Assigned to Filtered Coffee\000d\000a(99.99, 'Espresso Pack', 'espresso_pack.jpg', 8, 13, 13), -- Assigned to Espresso\000d\000a(8.99, 'Filtered Coffee Pack 2', 'filtered_coffee_pack_2.jpg', 9, 14, 14)"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+(79.99, 'Professional espresso machine for cafes', 'Commercial Espresso Machine', 'commercial_espresso_machine.jpg', 3, 6, 1), -- Assigned to Espresso Equipment
+(34.99, 'Stylish and durable coffee maker with glass carafe', 'Glass Carafe Coffee Maker', 'glass_carafe_coffee_maker.jpg', 3, 8, 5), -- Assigned to Espresso Equipment
+(49.99, 'High-quality coffee scale with precision measurement', 'Coffee Scale', 'coffee_scale.jpg', 4, 7, 3), -- Assigned to Coffee Filters
+(64.99, 'Automatic pour-over coffee maker with temperature control', 'Pour-Over Coffee Maker', 'pour_over_coffee_maker.jpg', 3, 2, 4), -- Assigned to Espresso Equipment
+(19.99, 'Stylish coffee storage canister for keeping beans fresh', 'Coffee Storage Canister', 'coffee_storage_canister.jpg', 4, 3, 7), -- Assigned to Coffee Filters
+(9.99, 'Premium coffee grinder for home use', 'Home Coffee Grinder', 'home_coffee_grinder.jpg', 5, 5, 2), -- Assigned to Coffee Grinders
+(49.99, 'High-Quality Coffee Scale', 'coffee_scale.jpg', 6, 7, 3), -- Assigned to Coffee Filters
+(13.00, 'Test Coffee Filter', 'test_product.jpg', 6, 11, 11), -- Assigned to Coffee Filters
+(29.99, 'Filtered Coffee Pack', 'filtered_coffee_pack.jpg', 7, 12, 12), -- Assigned to Filtered Coffee
+(99.99, 'Espresso Pack', 'espresso_pack.jpg', 8, 13, 13), -- Assigned to Espresso
+(8.99, 'Filtered Coffee Pack 2', 'filtered_coffee_pack_2.jpg', 9, 14, 14) [42001-224]
+2024-04-17 14:46:51.628798+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column count does not match; SQL statement:
+INSERT INTO tuote (HINTA, KUVAUS, NIMI, TUOTEKUVA, OSASTO_ID, TOIMITTAJA_ID, VALMISTAJA_ID)
+VALUES
+(79.99, 'Professional espresso machine for cafes', 'Commercial Espresso Machine', 'commercial_espresso_machine.jpg', 3, 6, 1), -- Assigned to Espresso Equipment
+(34.99, 'Stylish and durable coffee maker with glass carafe', 'Glass Carafe Coffee Maker', 'glass_carafe_coffee_maker.jpg', 3, 8, 5), -- Assigned to Espresso Equipment
+(49.99, 'High-quality coffee scale with precision measurement', 'Coffee Scale', 'coffee_scale.jpg', 4, 7, 3), -- Assigned to Coffee Filters
+(64.99, 'Automatic pour-over coffee maker with temperature control', 'Pour-Over Coffee Maker', 'pour_over_coffee_maker.jpg', 3, 2, 4), -- Assigned to Espresso Equipment
+(19.99, 'Stylish coffee storage canister for keeping beans fresh', 'Coffee Storage Canister', 'coffee_storage_canister.jpg', 4, 3, 7), -- Assigned to Coffee Filters
+(9.99, 'Premium coffee grinder for home use', 'Home Coffee Grinder', 'home_coffee_grinder.jpg', 5, 5, 2), -- Assigned to Coffee Grinders
+(49.99, 'High-Quality Coffee Scale', 'coffee_scale.jpg', 6, 7, 3), -- Assigned to Coffee Filters
+(13.00, 'Test Coffee Filter', 'test_product.jpg', 6, 11, 11), -- Assigned to Coffee Filters
+(29.99, 'Filtered Coffee Pack', 'filtered_coffee_pack.jpg', 7, 12, 12), -- Assigned to Filtered Coffee
+(99.99, 'Espresso Pack', 'espresso_pack.jpg', 8, 13, 13), -- Assigned to Espresso
+(8.99, 'Filtered Coffee Pack 2', 'filtered_coffee_pack_2.jpg', 9, 14, 14) [21002-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.dml.Insert.doPrepare(Insert.java:295)
+	at org.h2.command.dml.DataChangeStatement.prepare(DataChangeStatement.java:37)
+	at org.h2.command.Parser.prepareCommand(Parser.java:489)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp.query(WebApp.java:1119)
+	at org.h2.server.web.WebApp.process(WebApp.java:245)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-04-17 14:47:33.322821+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column count does not match; SQL statement:
+INSERT INTO tuote (HINTA, KUVAUS, NIMI, TUOTEKUVA, OSASTO_ID, TOIMITTAJA_ID, VALMISTAJA_ID)
+VALUES
+(79.99, 'Professional espresso machine for cafes', 'Commercial Espresso Machine', 'commercial_espresso_machine.jpg', 3, 6, 1),
+(34.99, 'Stylish and durable coffee maker with glass carafe', 'Glass Carafe Coffee Maker', 'glass_carafe_coffee_maker.jpg', 3, 8, 5),
+(49.99, 'High-quality coffee scale with precision measurement', 'Coffee Scale', 'coffee_scale.jpg', 4, 7, 3),
+(64.99, 'Automatic pour-over coffee maker with temperature control', 'Pour-Over Coffee Maker', 'pour_over_coffee_maker.jpg', 3, 2, 4),
+(19.99, 'Stylish coffee storage canister for keeping beans fresh', 'Coffee Storage Canister', 'coffee_storage_canister.jpg', 4, 3, 7),
+(9.99, 'Premium coffee grinder for home use', 'Home Coffee Grinder', 'home_coffee_grinder.jpg', 5, 5, 2),
+(49.99, 'High-Quality Coffee Scale', 'coffee_scale.jpg', 6, 7, 3),
+(13.00, 'Test Coffee Filter', 'test_product.jpg', 6, 11, 11),
+(29.99, 'Filtered Coffee Pack', 'filtered_coffee_pack.jpg', 7, 12, 12),
+(99.99, 'Espresso Pack', 'espresso_pack.jpg', 8, 13, 13),
+(8.99, 'Filtered Coffee Pack 2', 'filtered_coffee_pack_2.jpg', 9, 14, 14) [21002-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.dml.Insert.doPrepare(Insert.java:295)
+	at org.h2.command.dml.DataChangeStatement.prepare(DataChangeStatement.java:37)
+	at org.h2.command.Parser.prepareCommand(Parser.java:489)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp.query(WebApp.java:1119)
+	at org.h2.server.web.WebApp.process(WebApp.java:245)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-04-17 14:51:12.228541+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO tuote (HINTA, KUVAUS, NIMI, TUOTEKUVA, OSASTO_ID, TOIMITTAJA_ID, VALMISTAJA_ID)\000d\000aVALUES\000d\000a(79.99, 'Professional espresso machine for cafes', 'Commercial Espresso Machine', 'commercial_espresso_machine.jpg', 3, 6, 1),\000d\000a(34.99, 'Stylish and durable coffee maker with glass carafe', 'Glass Carafe Coffee Maker', 'glass_carafe_coffee_maker.jpg', 3, 8, 5),\000d\000a(49.99, 'High-quality coffee scale with precision measurement', 'Coffee Scale', 'coffee_scale.jpg', 4, 7, 3),\000d\000a(64.99, 'Automatic pour-over coffee maker with temperature control', 'Pour-Over Coffee Maker', 'pour_over_coffee_maker.jpg', 3, 2, 4),\000d\000a(19.99, 'Stylish coffee storage canister for keeping beans fresh', 'Coffee Storage Canister', 'coffee_storage_canister.jpg', 4, 3, 7),\000d\000a(9.99, 'Premium coffee grinder for home use', 'Home Coffee Grinder', 'home_coffee_grinder.jpg', 5, 5, 2),\000d\000a(49.99, 'High-Quality Coffee Scale', 'Coffee Scale', 'coffee_scale.jpg', 6, 7, 3),[*]"; expected "ROW (, (, DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+INSERT INTO tuote (HINTA, KUVAUS, NIMI, TUOTEKUVA, OSASTO_ID, TOIMITTAJA_ID, VALMISTAJA_ID)
+VALUES
+(79.99, 'Professional espresso machine for cafes', 'Commercial Espresso Machine', 'commercial_espresso_machine.jpg', 3, 6, 1),
+(34.99, 'Stylish and durable coffee maker with glass carafe', 'Glass Carafe Coffee Maker', 'glass_carafe_coffee_maker.jpg', 3, 8, 5),
+(49.99, 'High-quality coffee scale with precision measurement', 'Coffee Scale', 'coffee_scale.jpg', 4, 7, 3),
+(64.99, 'Automatic pour-over coffee maker with temperature control', 'Pour-Over Coffee Maker', 'pour_over_coffee_maker.jpg', 3, 2, 4),
+(19.99, 'Stylish coffee storage canister for keeping beans fresh', 'Coffee Storage Canister', 'coffee_storage_canister.jpg', 4, 3, 7),
+(9.99, 'Premium coffee grinder for home use', 'Home Coffee Grinder', 'home_coffee_grinder.jpg', 5, 5, 2),
+(49.99, 'High-Quality Coffee Scale', 'Coffee Scale', 'coffee_scale.jpg', 6, 7, 3), [42001-224]
