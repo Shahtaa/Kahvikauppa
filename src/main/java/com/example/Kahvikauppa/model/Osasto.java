@@ -20,7 +20,6 @@ public class Osasto {
 
     private String nimi;
 
-    // Define the one-to-many relationship with Tuote
     @OneToMany(mappedBy = "osasto")
     private List<Tuote> tuotteet = new ArrayList<>();
 }
