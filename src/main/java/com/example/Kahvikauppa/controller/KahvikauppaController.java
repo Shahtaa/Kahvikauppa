@@ -1,25 +1,23 @@
 package com.example.Kahvikauppa.controller;
 
-import org.springframework.http.MediaType;
-import com.example.Kahvikauppa.model.Osasto;
-import com.example.Kahvikauppa.model.Tuote;
-import com.example.Kahvikauppa.model.Toimittaja;
-import com.example.Kahvikauppa.model.Valmistaja;
-import com.example.Kahvikauppa.service.OsastoService;
-import com.example.Kahvikauppa.service.TuoteService;
-import com.example.Kahvikauppa.service.ToimittajaService;
-import com.example.Kahvikauppa.service.ValmistajaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
+import com.example.Kahvikauppa.model.Osasto;
+import com.example.Kahvikauppa.model.Toimittaja;
+import com.example.Kahvikauppa.model.Tuote;
+import com.example.Kahvikauppa.model.Valmistaja;
+import com.example.Kahvikauppa.service.OsastoService;
+import com.example.Kahvikauppa.service.ToimittajaService;
+import com.example.Kahvikauppa.service.TuoteService;
+import com.example.Kahvikauppa.service.ValmistajaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
 
 @Controller
@@ -39,11 +37,13 @@ public class KahvikauppaController {
         this.valmistajaService = valmistajaService;
     }
 
+    // Home page
     @GetMapping("/")
     public String etusivu() {
         return "index";
     }
 
+    // Department endpoints
     @GetMapping("/osastot")
     public String osastot(Model model) {
         List<Osasto> osastot = osastoService.findAllOsastot();
@@ -57,18 +57,7 @@ public class KahvikauppaController {
         return "redirect:/osastot";
     }
 
-    @GetMapping("/kahvilaitteet")
-    public String getKahvilaitteet(Model model) {
-        List<Tuote> kahvilaitteet = tuoteService.getKahvilaitteet(1L); // Fetch products for osasto ID 1
-        model.addAttribute("kahvilaitteet", kahvilaitteet);
-        return "kahvilaitteet";
-    }
-
-    @GetMapping("/kulutustuotteet")
-    public String kulutustuotteet() {
-        return "kulutustuotteet";
-    }
-
+    // Product endpoints
     @GetMapping("/tuotteet")
     public String tuotteet(Model model) {
         model.addAttribute("tuotteet", tuoteService.findAllTuotteet());
@@ -78,23 +67,9 @@ public class KahvikauppaController {
         return "tuotteet";
     }
 
-    @GetMapping("/productImage/{id}")
-    public ResponseEntity<byte[]> getProductImage(@PathVariable Long id) {
-        Tuote product = tuoteService.findTuoteById(id);
-        if (product != null && product.getTuotekuva() != null) {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_JPEG);
-            return new ResponseEntity<>(product.getTuotekuva(), headers, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
     @PostMapping("/lisaa-tuote")
     public String lisaaTuote(@ModelAttribute Tuote tuote, @RequestParam("kuva") MultipartFile file) throws IOException {
-        // Save the Tuote object along with the file content
         tuoteService.saveTuote(tuote, file);
-
         return "redirect:/tuotteet";
     }
 
@@ -121,6 +96,7 @@ public class KahvikauppaController {
         return "redirect:/tuotteet";
     }
 
+    // Supplier endpoints
     @GetMapping("/toimittajat")
     public String toimittajat(Model model) {
         model.addAttribute("toimittajat", toimittajaService.findAllToimittajat());
@@ -156,6 +132,7 @@ public class KahvikauppaController {
         return "redirect:/toimittajat";
     }
 
+    // Manufacturer endpoints
     @GetMapping("/valmistajat")
     public String valmistajat(Model model) {
         model.addAttribute("valmistajat", valmistajaService.findAllValmistajat());
@@ -189,5 +166,30 @@ public class KahvikauppaController {
     public String poistaValmistaja(@PathVariable Long id) {
         valmistajaService.deleteValmistaja(id);
         return "redirect:/valmistajat";
+    }
+
+    // Other endpoints
+    @GetMapping("/kahvilaitteet")
+    public String getKahvilaitteet(Model model) {
+        List<Tuote> kahvilaitteet = tuoteService.getKahvilaitteet(1L); // Fetch products for osasto ID 1
+        model.addAttribute("kahvilaitteet", kahvilaitteet);
+        return "kahvilaitteet";
+    }
+
+    @GetMapping("/kulutustuotteet")
+    public String kulutustuotteet() {
+        return "kulutustuotteet";
+    }
+
+    @GetMapping("/productImage/{id}")
+    public ResponseEntity<byte[]> getProductImage(@PathVariable Long id) {
+        Tuote product = tuoteService.findTuoteById(id);
+        if (product != null && product.getTuotekuva() != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+            return new ResponseEntity<>(product.getTuotekuva(), headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
