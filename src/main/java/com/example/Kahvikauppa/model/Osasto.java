@@ -16,7 +16,6 @@ public class Osasto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Reference to the parent osasto
     private Long osastoIDP;
 
     private String nimi;
