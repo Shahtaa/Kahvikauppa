@@ -4,40 +4,10 @@
     <meta charset="UTF-8" />
     <title>Kahvilaitteet</title>
     <link rel="stylesheet" type="text/css" href="./styles.css" />
-    <style>
-      /* CSS for grid layout */
-      .grid-container {
-        display: grid;
-        grid-template-columns: repeat(
-          auto-fill,
-          minmax(250px, 1fr)
-        ); /* Maximum 3 items per row */
-        gap: 20px;
-        padding: 10px; /* Add padding for spacing */
-        max-width: 1000px; /* Maximum width for three items */
-        overflow-x: hidden; /* Hide horizontal overflow */
-      }
-
-      /* Style for each grid item */
-      .grid-item {
-        border: 1px solid #ccc; /* Add border to each grid item */
-        padding: 10px; /* Add padding for spacing */
-        display: flex; /* Use flexbox */
-        flex-direction: column; /* Stack children vertically */
-        justify-content: space-between; /* Distribute items with space between */
-        height: auto; /* Allow grid items to adjust height based on content */
-      }
-      /* Style for product images */
-      .product-image {
-        display: block; /* Set display property to block */
-        max-width: 100%; /* Limit image width to 100% of container */
-        max-height: 250px; /* Limit image height */
-        height: auto;
-        margin: 0 auto; /* Center align horizontally */
-        border-bottom: 1px solid #ccc; /* Add border line to the top */
-        padding-bottom: 10px;
-      }
-    </style>
+    <script
+      src="https://kit.fontawesome.com/dc76f903b0.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div>
@@ -67,10 +37,18 @@
           <!-- Display product name -->
           <h3 th:text="${tuote.nimi}"></h3>
           <!-- Display product price -->
-          <p>
-            <span th:text="${tuote.hinta}"></span>
-            <span>&euro;</span>
-          </p>
+          <div class="price-container">
+            <p>
+              <span
+                style="font-weight: bold; font-size: large; color: white"
+                th:text="${tuote.hinta}"
+              ></span>
+              <i
+                class="fa-solid fa-euro-sign euro-icon"
+                style="color: white"
+              ></i>
+            </p>
+          </div>
         </div>
       </div>
     </div>
