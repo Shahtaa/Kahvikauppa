@@ -9,11 +9,13 @@
       .grid-container {
         display: grid;
         grid-template-columns: repeat(
-          auto-fit,
-          minmax(calc(33.33% - 20px), 1fr)
-        ); /* Calculate width for 3 items per row with gap */
+          auto-fill,
+          minmax(250px, 1fr)
+        ); /* Maximum 3 items per row */
         gap: 20px;
         padding: 10px; /* Add padding for spacing */
+        max-width: 1000px; /* Maximum width for three items */
+        overflow-x: hidden; /* Hide horizontal overflow */
       }
 
       /* Style for each grid item */
@@ -25,19 +27,16 @@
         justify-content: space-between; /* Distribute items with space between */
         height: auto; /* Allow grid items to adjust height based on content */
       }
-
       /* Style for product images */
       .product-image {
-        width: 100%;
+        display: block; /* Set display property to block */
+        max-width: 100%; /* Limit image width to 100% of container */
+        max-height: 250px; /* Limit image height */
         height: auto;
+        margin: 0 auto; /* Center align horizontally */
+        border-bottom: 1px solid #ccc; /* Add border line to the top */
+        padding-bottom: 10px;
       }
-
-      .product-details {
-        border-top: 1px solid #ccc; /* Add border line to the top */
-        padding-top: 10px; /* Add padding to separate from image */
-      }
-
-      /* Style for product details */
     </style>
   </head>
   <body>
@@ -46,9 +45,9 @@
       <nav>
         <ul>
           <li><a href="/">Etusivu</a></li>
-          <li><a href="/osastot">Osastot</a></li>
           <li><a href="/kahvilaitteet">Kahvilaitteet</a></li>
           <li><a href="/kulutustuotteet">Kulutustuotteet</a></li>
+          <li><a href="/tuotteet">admin</a></li>
         </ul>
       </nav>
     </div>

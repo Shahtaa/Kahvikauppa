@@ -1358,3 +1358,80 @@ VALUES
 (19.99, 'Stylish coffee storage canister for keeping beans fresh', 'Coffee Storage Canister', 'coffee_storage_canister.jpg', 4, 3, 7),
 (9.99, 'Premium coffee grinder for home use', 'Home Coffee Grinder', 'home_coffee_grinder.jpg', 5, 5, 2),
 (49.99, 'High-Quality Coffee Scale', 'Coffee Scale', 'coffee_scale.jpg', 6, 7, 3), [42001-224]
+2024-04-19 10:50:35.196748+03:00 jdbc[35]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:218)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:135)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:288)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:811)
+	at org.h2.server.web.WebApp.login(WebApp.java:1039)
+	at org.h2.server.web.WebApp.process(WebApp.java:227)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 47 more
+2024-04-19 11:13:29.872103+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "-- Child of Kahvi\000d\000a\000d\000a\000d\000a\000d\000a\000d\000a\000d\000a\000d\000a\000d\000a\000d\000a\000d\000a\000d\000aINSERT INTO toimittaja (NIMI, YHTEYSHENKILON_EMAIL, YHTEYSTIETO) VALUES\000d\000a('Coffee Masters International', 'info@coffeemasters.com', '+1-123-456-7890'),\000d\000a('Global Bean Supply Co.', 'info@globalbeansupply.com', '+1-234-567-8901'),\000d\000a('Java Imports Inc.', 'info@javaimports.com', '+1-345-678-9012'),\000d\000a('Bean Alliance Ltd.', 'info@beanalliance.com', '+1-456-789-0123'),\000d\000a('Quality Brews International', 'info@qualitybrews.com', '+1-567-890-1234'),\000d\000a('Coffee World Trading', 'info@coffeeworldtrading.com', '+1-678-901-2345'),\000d\000a('Roaster'[*]s Choice Ltd.', 'info@roasterschoice.com', '+1-789-012-3456'),\000d\000a('BeanBroker Global', 'info@beanbroker.com', '+1-890-123-4567'),\000d\000a('Brewer's Supply Co.', 'info@brewerssupply.com', '+1-901-234-5678'),\000d\000a('Global Roast Masters', 'info@globalroastmasters.com', '+1-012-345-6789')"; expected "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"; SQL statement:
+-- Child of Kahvi
+
+
+
+
+
+
+
+
+
+
+INSERT INTO toimittaja (NIMI, YHTEYSHENKILON_EMAIL, YHTEYSTIETO) VALUES
+('Coffee Masters International', 'info@coffeemasters.com', '+1-123-456-7890'),
+('Global Bean Supply Co.', 'info@globalbeansupply.com', '+1-234-567-8901'),
+('Java Imports Inc.', 'info@javaimports.com', '+1-345-678-9012'),
+('Bean Alliance Ltd.', 'info@beanalliance.com', '+1-456-789-0123'),
+('Quality Brews International', 'info@qualitybrews.com', '+1-567-890-1234'),
+('Coffee World Trading', 'info@coffeeworldtrading.com', '+1-678-901-2345'),
+('Roaster's Choice Ltd.', 'info@roasterschoice.com', '+1-789-012-3456'),
+('BeanBroker Global', 'info@beanbroker.com', '+1-890-123-4567'),
+('Brewer's Supply Co.', 'info@brewerssupply.com', '+1-901-234-5678'),
+('Global Roast Masters', 'info@globalroastmasters.com', '+1-012-345-6789') [42001-224]
