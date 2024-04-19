@@ -6,7 +6,7 @@ nav ul {
 }
 
 nav ul li {
-  display: inline;
+  display: inline-block; /* Corrected display property */
   margin-right: 20px;
 }
 
@@ -37,15 +37,16 @@ th {
   font-weight: bold;
   color: #333;
 }
+
 tr {
   text-align: center;
 }
+
 /* Form Styles */
 input[type="text"],
 input[type="number"],
 input[type="submit"] {
   padding: 8px;
-
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -78,12 +79,11 @@ input[type="submit"]:hover {
   margin: 0;
   padding: 8px;
 }
+
+/* Grid Styles */
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(250px, 1fr)
-  ); /* Maximum 3 items per row */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   padding: 10px; /* Add padding for spacing */
   max-width: 1000px; /* Maximum width for three items */
@@ -92,28 +92,30 @@ input[type="submit"]:hover {
 
 /* Style for each grid item */
 .grid-item {
-  border: 1px solid #ccc; /* Add border to each grid item */
+  border: 1px solid #ccc;
   padding: 10px; /* Add padding for spacing */
-  display: flex; /* Use flexbox */
-  flex-direction: column; /* Stack children vertically */
-  justify-content: space-between; /* Distribute items with space between */
-  height: auto; /* Allow grid items to adjust height based on content */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
+
 /* Style for product images */
 .product-image {
-  display: block; /* Set display property to block */
-  max-width: 100%; /* Limit image width to 100% of container */
-  max-height: 250px; /* Limit image height */
+  display: block;
+  max-width: 100%;
+  max-height: 250px;
   height: auto;
   margin: 0 auto; /* Center align horizontally */
-  border-bottom: 1px solid #ccc; /* Add border line to the top */
+  border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
 }
+
+/* Price Container Styles */
 .price-container {
-  background-color: #ff9800; /* Dark red background color */
-  border-radius: 5px; /* Add rounded corners */
-  display: inline-block; /* Make the container fit its content */
-  width: 100px; /* Set width */
-  height: 50px; /* Set height */
+  background-color: #ff9800;
+  border-radius: 5px;
+  display: inline-block;
+  width: 100px;
+  height: 50px;
   text-align: center;
 }
