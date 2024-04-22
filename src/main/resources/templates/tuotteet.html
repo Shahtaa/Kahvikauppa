@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <title>Tuotteet</title>
     <link rel="stylesheet" type="text/css" href="/styles.css" />
+    <style>
+      #kuvaus-error {
+        color: red;
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <div>
@@ -11,72 +17,76 @@
       <nav>
         <ul>
           <li><a href="/">Etusivu</a></li>
-
           <li><a href="/kahvilaitteet">Kahvilaitteet</a></li>
           <li><a href="/kulutustuotteet">Kulutustuotteet</a></li>
           <li><a href="/tuotteet">Tuotteet</a></li>
           <li><a href="/valmistajat">Valmistajat</a></li>
           <li><a href="/toimittajat">Toimittajat</a></li>
-
           <li><a href="/osastot">Osastot</a></li>
         </ul>
       </nav>
     </div>
     <h2>Lisää uusi tuote</h2>
+
     <form
       action="/lisaa-tuote"
       method="post"
       class="lisaa-tuote"
       enctype="multipart/form-data"
     >
-      <label for="nimi">Nimi:</label><br />
-      <input type="text" id="nimi" name="nimi" required /><br />
+      <label for="nimi">Nimi:</label>
+      <input type="text" id="nimi" name="nimi" required />
 
-      <label for="kuvaus">Kuvaus:</label><br />
-      <textarea id="kuvaus" name="kuvaus" required></textarea><br />
+      <!-- Muut lomakkeen kentät -->
 
-      <label for="hinta">Hinta:</label><br />
-      <input type="text" id="hinta" name="hinta" required /><br />
+      <label for="kuvaus">Kuvaus:</label>
+      <div id="kuvaus-error">Kuvaus saa olla enintään 1000 merkkiä pitkä.</div>
+      <textarea id="kuvaus" name="kuvaus" required></textarea>
 
-      <label for="kuva">Kuva:</label><br />
+      <label for="hinta">Hinta:</label>
       <input
-        type="file"
-        id="kuva"
-        name="kuva"
-        accept="image/*"
+        type="text"
+        id="hinta"
+        name="hinta"
         required
-      /><br />
+        pattern="\d+(\.\d{2})?"
+        title="Syötä hinta muodossa xx.xx"
+      />
+
+      <label for="kuva">Kuva:</label>
+      <input type="file" id="kuva" name="kuva" accept="image/*" required />
 
       <!-- Supplier dropdown menu -->
-      <label for="toimittaja">Toimittaja:</label><br />
+      <label for="toimittaja">Toimittaja:</label>
       <select id="toimittaja" name="toimittaja" required>
         <option
           th:each="toimittaja : ${toimittajat}"
           th:value="${toimittaja.id}"
         >
           <span th:text="${toimittaja.nimi}"></span>
-        </option></select
-      ><br />
+        </option>
+      </select>
 
-      <label for="valmistaja">Valmistaja:</label><br />
+      <label for="valmistaja">Valmistaja:</label>
       <select id="valmistaja" name="valmistaja" required>
         <option
           th:each="valmistaja : ${valmistajat}"
           th:value="${valmistaja.id}"
         >
           <span th:text="${valmistaja.nimi}"></span>
-        </option></select
-      ><br />
+        </option>
+      </select>
 
-      <label for="osasto">Osasto:</label><br />
+      <label for="osasto">Osasto:</label>
       <select id="osasto" name="osasto" required>
         <option th:each="osasto : ${osastot}" th:value="${osasto.id}">
           <span th:text="${osasto.nimi}"></span>
-        </option></select
-      ><br />
+        </option>
+      </select>
 
       <input type="submit" value="Lisää tuote" />
     </form>
+
     <div>
       <h2>Tuotteet</h2>
       <table>
@@ -114,5 +124,16 @@
         </tr>
       </table>
     </div>
+    <script>
+      document
+        .querySelector(".lisaa-tuote")
+        .addEventListener("submit", function (event) {
+          var kuvaus = document.getElementById("kuvaus").value;
+          if (kuvaus.length > 1000) {
+            event.preventDefault(); // Estä lomakkeen lähettäminen
+            document.getElementById("kuvaus-error").style.display = "block"; // Näytä virheviesti
+          }
+        });
+    </script>
   </body>
 </html>

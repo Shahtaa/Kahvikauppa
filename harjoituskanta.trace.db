@@ -1435,3 +1435,9 @@ INSERT INTO toimittaja (NIMI, YHTEYSHENKILON_EMAIL, YHTEYSTIETO) VALUES
 ('BeanBroker Global', 'info@beanbroker.com', '+1-890-123-4567'),
 ('Brewer's Supply Co.', 'info@brewerssupply.com', '+1-901-234-5678'),
 ('Global Roast Masters', 'info@globalroastmasters.com', '+1-012-345-6789') [42001-224]
+2024-04-22 13:58:42.197453+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "KUVAUS CHARACTER VARYING(1000)": "'asddasdadasasddasdadasasddasdadasasddasdadasasddasdadasasddasdadasasddasdadasas... (1540)"; SQL statement:
+insert into tuote (hinta,kuvaus,nimi,osasto_id,toimittaja_id,tuotekuva,valmistaja_id,id) values (?,?,?,?,?,?,?,default) [22001-224]
+2024-04-22 14:01:50.795466+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "KUVAUS CHARACTER VARYING(1000)": "'asddasdsaasddasdsaasddasdsaasddasdsaasddasdsaasddasdsaasddasdsaasddasdsaasddasd... (28350)"; SQL statement:
+insert into tuote (hinta,kuvaus,nimi,osasto_id,toimittaja_id,tuotekuva,valmistaja_id,id) values (?,?,?,?,?,?,?,default) [22001-224]
