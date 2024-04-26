@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 public class ToimittajaController {
 
@@ -31,5 +29,31 @@ public class ToimittajaController {
         return "redirect:/toimittajat";
     }
 
-    // Add other ToimittajaController endpoints here
+    @GetMapping("/muokkaa-toimittaja/{id}")
+    public String näytäMuokkauslomake(@PathVariable("id") String id, Model model) {
+        try {
+            Long toimittajaId = Long.parseLong(id);
+            Toimittaja toimittaja = toimittajaService.findToimittajaById(toimittajaId);
+            if (toimittaja == null) {
+                return "redirect:/toimittajat";
+            }
+            model.addAttribute("toimittaja", toimittaja);
+            return "muokkaa-toimittaja";
+        } catch (NumberFormatException e) {
+            return "redirect:/toimittajat";
+        }
+    }
+
+    @PostMapping("/muokkaa-toimittaja/{id}")
+    public String tallennaMuutokset(@PathVariable("id") Long id, @ModelAttribute("toimittaja") Toimittaja toimittaja) {
+        toimittaja.setId(id);
+        toimittajaService.saveToimittaja(toimittaja);
+        return "redirect:/toimittajat";
+    }
+
+    @PostMapping("/poista-toimittaja/{id}")
+    public String poistaToimittaja(@PathVariable("id") Long id) {
+        toimittajaService.deleteToimittaja(id);
+        return "redirect:/toimittajat";
+    }
 }

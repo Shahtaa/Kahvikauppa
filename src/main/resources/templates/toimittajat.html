@@ -11,13 +11,11 @@
       <nav>
         <ul>
           <li><a href="/">Etusivu</a></li>
-
           <li><a href="/kahvilaitteet">Kahvilaitteet</a></li>
           <li><a href="/kulutustuotteet">Kulutustuotteet</a></li>
           <li><a href="/tuotteet">Tuotteet</a></li>
           <li><a href="/valmistajat">Valmistajat</a></li>
           <li><a href="/toimittajat">Toimittajat</a></li>
-
           <li><a href="/osastot">Osastot</a></li>
         </ul>
       </nav>
@@ -50,6 +48,7 @@
           <th>Nimi</th>
           <th>Yhteystieto</th>
           <th>Yhteyshenkilon Email</th>
+          <th>Toiminnot</th>
         </tr>
         <!-- Iterate over the list of suppliers and display them in table rows -->
         <tr th:each="toimittaja : ${toimittajat}">
@@ -57,6 +56,32 @@
           <td th:text="${toimittaja.nimi}"></td>
           <td th:text="${toimittaja.yhteystieto}"></td>
           <td th:text="${toimittaja.yhteyshenkilonEmail}"></td>
+          <td>
+            <form
+              th:action="@{'/muokkaa-toimittaja/' + ${toimittaja.id}}"
+              method="get"
+            >
+              <input
+                type="hidden"
+                name="toimittajaId"
+                th:value="${toimittaja.id}"
+              />
+              <input type="submit" value="Muokkaa" class="action-button" />
+            </form>
+
+            <form
+              th:action="@{'/poista-toimittaja/' + ${toimittaja.id}}"
+              method="post"
+              onsubmit="return confirmDelete()"
+            >
+              <input
+                type="hidden"
+                name="toimittajaId"
+                th:value="${toimittaja.id}"
+              />
+              <input type="submit" value="Poista" class="action-button" />
+            </form>
+          </td>
         </tr>
       </table>
     </div>
