@@ -46,7 +46,11 @@
       <div th:if="${error}" class="error-message">
         <p th:text="${error}"></p>
       </div>
-
+      <script th:if="${error}">
+        setTimeout(function () {
+          window.location.href = "/toimittajat";
+        }, 3000); // 3000 milliseconds = 3 seconds
+      </script>
       <table>
         <tr>
           <th>ID</th>
