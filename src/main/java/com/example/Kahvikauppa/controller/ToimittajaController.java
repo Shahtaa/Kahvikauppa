@@ -52,8 +52,15 @@ public class ToimittajaController {
     }
 
     @PostMapping("/poista-toimittaja/{id}")
-    public String poistaToimittaja(@PathVariable("id") Long id) {
+    public String poistaToimittaja(@PathVariable("id") Long id, Model model) {
+        Toimittaja toimittaja = toimittajaService.findToimittajaById(id);
+        if (toimittaja != null && !toimittaja.getTuotteet().isEmpty()) {
+            model.addAttribute("error", "Toimittajalla on liitettyjä tuotteita. Poista ensin tuotteet.");
+            model.addAttribute("toimittajat", toimittajaService.findAllToimittajat());
+            return "toimittajat";
+        }
         toimittajaService.deleteToimittaja(id);
         return "redirect:/toimittajat";
     }
+
 }

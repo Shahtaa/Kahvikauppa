@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <title>Toimittajat</title>
-    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <link rel="stylesheet" type="text/css" href="/styles.css" />
   </head>
   <body>
     <div>
       <h1>Toimittajat</h1>
+
       <nav>
         <ul>
           <li><a href="/">Etusivu</a></li>
@@ -42,6 +43,10 @@
     </div>
     <div>
       <h2>Lisätyt toimittajat</h2>
+      <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p>
+      </div>
+
       <table>
         <tr>
           <th>ID</th>

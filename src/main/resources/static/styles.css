@@ -3,7 +3,9 @@ body {
   background-color: #ffdfba;
   color: #4c4c4c;
 }
-
+.error-message {
+  color: red;
+}
 #kuvaus-error {
   color: red;
   display: none;
