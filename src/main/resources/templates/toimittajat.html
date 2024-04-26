@@ -8,7 +8,6 @@
   <body>
     <div>
       <h1>Toimittajat</h1>
-
       <nav>
         <ul>
           <li><a href="/">Etusivu</a></li>
@@ -21,6 +20,7 @@
         </ul>
       </nav>
     </div>
+
     <div>
       <h2>Lisää uusi toimittaja</h2>
       <form action="/lisaa-toimittaja" method="post">
@@ -41,16 +41,12 @@
         <input type="submit" value="Lisää toimittaja" />
       </form>
     </div>
+
     <div>
       <h2>Lisätyt toimittajat</h2>
       <div th:if="${error}" class="error-message">
         <p th:text="${error}"></p>
       </div>
-      <script th:if="${error}">
-        setTimeout(function () {
-          window.location.href = "/toimittajat";
-        }, 3000); // 3000 milliseconds = 3 seconds
-      </script>
       <table>
         <tr>
           <th>ID</th>
@@ -94,5 +90,11 @@
         </tr>
       </table>
     </div>
+
+    <script th:if="${error}">
+      setTimeout(function () {
+        window.location.href = "/toimittajat";
+      }, 3000); // 3000 milliseconds = 3 seconds
+    </script>
   </body>
 </html>
