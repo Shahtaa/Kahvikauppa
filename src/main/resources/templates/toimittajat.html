@@ -61,7 +61,7 @@
           <td th:text="${toimittaja.nimi}"></td>
           <td th:text="${toimittaja.yhteystieto}"></td>
           <td th:text="${toimittaja.yhteyshenkilonEmail}"></td>
-          <td>
+          <td class="action-buttons">
             <form
               th:action="@{'/muokkaa-toimittaja/' + ${toimittaja.id}}"
               method="get"
