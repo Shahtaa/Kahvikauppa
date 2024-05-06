@@ -1441,3 +1441,12 @@ insert into tuote (hinta,kuvaus,nimi,osasto_id,toimittaja_id,tuotekuva,valmistaj
 2024-04-22 14:01:50.795466+03:00 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLDataException: Value too long for column "KUVAUS CHARACTER VARYING(1000)": "'asddasdsaasddasdsaasddasdsaasddasdsaasddasdsaasddasdsaasddasdsaasddasdsaasddasd... (28350)"; SQL statement:
 insert into tuote (hinta,kuvaus,nimi,osasto_id,toimittaja_id,tuotekuva,valmistaja_id,id) values (?,?,?,?,?,?,?,default) [22001-224]
+2024-05-02 12:49:26.158372+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO tuote (HINTA, KUVAUS, NIMI, TUOTEKUVA, OSASTO_ID, TOIMITTAJA_ID, VALMISTAJA_ID) VALUES\000d\000a(59.99, 'Laadukas suodatinkahvinkeitin kotikäyttöön', 'Suodatinkahvinkeitin', 'suodatinkahvinkeitin.jpg', 4, 1, 6), -- Suodatinkahvi\000d\000a(24.99, 'Tyylikäs kahvisäiliö purukahville', 'Kahvisäiliö', 'kahvisailio.jpg', 4, 2, 6), -- Suodatinkahvi\000d\000a(39.99, 'Laadukas espressopannu kotikäyttöön', 'Espressopannu', 'espressopannu.jpg', 3, 3, 1), -- Espressolaitteet\000d\000a(14.99, 'Kestävä kahvimylly kotikäyttöön', 'Kahvimylly', 'kahvimylly.jpg', 3, 4, 2), -- Kahvimyllyt\000d\000a(29.99, 'Tyylikäs kahvinvaahdotin', 'Kahvinvaahdotin', 'kahvinvaahdotin.jpg', 3, 5, 1), -- Espressolaitteet\000d\000a(9.99, 'Laadukas kahvikuksa', 'Kahvikuksa', 'kahvikuksa.jpg', 3, 6, 3), -- Espressolaitteet[*]"; expected "ROW (, (, DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+INSERT INTO tuote (HINTA, KUVAUS, NIMI, TUOTEKUVA, OSASTO_ID, TOIMITTAJA_ID, VALMISTAJA_ID) VALUES
+(59.99, 'Laadukas suodatinkahvinkeitin kotikäyttöön', 'Suodatinkahvinkeitin', 'suodatinkahvinkeitin.jpg', 4, 1, 6), -- Suodatinkahvi
+(24.99, 'Tyylikäs kahvisäiliö purukahville', 'Kahvisäiliö', 'kahvisailio.jpg', 4, 2, 6), -- Suodatinkahvi
+(39.99, 'Laadukas espressopannu kotikäyttöön', 'Espressopannu', 'espressopannu.jpg', 3, 3, 1), -- Espressolaitteet
+(14.99, 'Kestävä kahvimylly kotikäyttöön', 'Kahvimylly', 'kahvimylly.jpg', 3, 4, 2), -- Kahvimyllyt
+(29.99, 'Tyylikäs kahvinvaahdotin', 'Kahvinvaahdotin', 'kahvinvaahdotin.jpg', 3, 5, 1), -- Espressolaitteet
+(9.99, 'Laadukas kahvikuksa', 'Kahvikuksa', 'kahvikuksa.jpg', 3, 6, 3), -- Espressolaitteet [42001-224]
