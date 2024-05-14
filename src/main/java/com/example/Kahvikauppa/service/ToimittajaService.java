@@ -22,13 +22,12 @@ public class ToimittajaService {
         return toimittajaRepository.findAll();
     }
 
-    public void saveToimittaja(Toimittaja toimittaja) {
-        toimittajaRepository.save(toimittaja);
+    public Toimittaja findToimittajaById(Long id) {
+        return toimittajaRepository.findById(id).orElse(null);
     }
 
-    public Toimittaja findToimittajaById(Long id) {
-        Optional<Toimittaja> optionalToimittaja = toimittajaRepository.findById(id);
-        return optionalToimittaja.orElse(null);
+    public void saveToimittaja(Toimittaja toimittaja) {
+        toimittajaRepository.save(toimittaja);
     }
 
     public void deleteToimittaja(Long id) {

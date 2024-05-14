@@ -23,8 +23,7 @@ public class ValmistajaService {
     }
 
     public Valmistaja findValmistajaById(Long id) {
-        Optional<Valmistaja> valmistajaOptional = valmistajaRepository.findById(id);
-        return valmistajaOptional.orElse(null);
+        return valmistajaRepository.findById(id).orElse(null);
     }
 
     public void saveValmistaja(Valmistaja valmistaja) {
@@ -33,5 +32,18 @@ public class ValmistajaService {
 
     public void deleteValmistaja(Long id) {
         valmistajaRepository.deleteById(id);
+    }
+
+    public void updateValmistaja(Long id, Valmistaja valmistaja) {
+        Optional<Valmistaja> existingValmistajaOptional = valmistajaRepository.findById(id);
+        if (existingValmistajaOptional.isPresent()) {
+            Valmistaja existingValmistaja = existingValmistajaOptional.get();
+            existingValmistaja.setNimi(valmistaja.getNimi());
+            existingValmistaja.setUrl(valmistaja.getUrl());
+            valmistajaRepository.save(existingValmistaja);
+        } else {
+            // Handle the case where the Valmistaja with the given id is not found
+            throw new IllegalArgumentException("Valmistaja not found with id: " + id);
+        }
     }
 }

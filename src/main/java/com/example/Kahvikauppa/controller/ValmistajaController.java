@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 public class ValmistajaController {
 
@@ -31,5 +29,33 @@ public class ValmistajaController {
         return "redirect:/valmistajat";
     }
 
-    // Add other ValmistajaController endpoints here
+    @GetMapping("/muokkaa-valmistaja/{id}")
+    public String muokkaaValmistaja(@PathVariable("id") Long id, Model model) {
+        Valmistaja valmistaja = valmistajaService.findValmistajaById(id);
+        if (valmistaja == null) {
+            return "redirect:/valmistajat";
+        }
+        model.addAttribute("valmistaja", valmistaja);
+        return "muokkaa-valmistaja";
+    }
+
+    @PostMapping("/muokkaa-valmistaja/{id}")
+    public String tallennaMuutokset(@PathVariable("id") Long id, @ModelAttribute("valmistaja") Valmistaja valmistaja) {
+        valmistaja.setId(id);
+        valmistajaService.saveValmistaja(valmistaja);
+        return "redirect:/valmistajat";
+    }
+
+    @PostMapping("/poista-valmistaja/{id}")
+    public String poistaValmistaja(@PathVariable("id") Long id, Model model) {
+        Valmistaja valmistaja = valmistajaService.findValmistajaById(id);
+        if (valmistaja != null && !valmistaja.getTuotteet().isEmpty()) {
+            model.addAttribute("error", "Valmistajalla on liitettyjä tuotteita. Poista ensin tuotteet.");
+            model.addAttribute("valmistajat", valmistajaService.findAllValmistajat());
+            return "valmistajat";
+        }
+        valmistajaService.deleteValmistaja(id);
+        return "redirect:/valmistajat";
+    }
+
 }

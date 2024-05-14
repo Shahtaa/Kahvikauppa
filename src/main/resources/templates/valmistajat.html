@@ -3,27 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <title>Valmistajat</title>
-    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <link rel="stylesheet" type="text/css" href="/styles.css" />
+    <!-- Add JavaScript function for confirmation dialog -->
+    <script th:inline="javascript">
+      function confirmDelete() {
+        return confirm("Are you sure you want to delete this manufacturer?");
+      }
+    </script>
   </head>
   <body>
     <div>
       <h1>Valmistajat</h1>
+
       <nav>
         <ul>
           <li><a href="/">Etusivu</a></li>
-
           <li><a href="/kahvilaitteet">Kahvilaitteet</a></li>
           <li><a href="/kulutustuotteet">Kulutustuotteet</a></li>
           <li><a href="/tuotteet">Tuotteet</a></li>
           <li><a href="/valmistajat">Valmistajat</a></li>
           <li><a href="/toimittajat">Toimittajat</a></li>
-
           <li><a href="/osastot">Osastot</a></li>
         </ul>
       </nav>
     </div>
+
     <div>
       <h2>Lisää uusi valmistaja</h2>
+      <!-- Form to add a new manufacturer -->
       <form action="/lisaa-valmistaja" method="post">
         <label for="nimi">Nimi:</label><br />
         <input type="text" id="nimi" name="nimi" required /><br />
@@ -34,21 +41,58 @@
         <input type="submit" value="Lisää valmistaja" />
       </form>
     </div>
+
     <div>
       <h2>Lisätyt valmistajat</h2>
+      <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p>
+      </div>
       <table>
         <tr>
           <th>ID</th>
           <th>Nimi</th>
           <th>URL</th>
+          <th>Toiminnot</th>
+          <!-- Add column for actions -->
         </tr>
         <!-- Iterate over the list of manufacturers and display them in table rows -->
         <tr th:each="valmistaja : ${valmistajat}">
           <td th:text="${valmistaja.id}"></td>
           <td th:text="${valmistaja.nimi}"></td>
           <td th:text="${valmistaja.url}"></td>
+          <!-- Add buttons for editing and deleting -->
+          <td class="action-buttons">
+            <form
+              th:action="@{'/muokkaa-valmistaja/' + ${valmistaja.id}}"
+              method="get"
+            >
+              <input
+                type="hidden"
+                name="valmistajaId"
+                th:value="${valmistaja.id}"
+              />
+              <input type="submit" value="Muokkaa" class="action-button" />
+            </form>
+            <form
+              th:action="@{'/poista-valmistaja/' + ${valmistaja.id}}"
+              method="post"
+              onsubmit="return confirmDelete()"
+            >
+              <input
+                type="hidden"
+                name="valmistajaId"
+                th:value="${valmistaja.id}"
+              />
+              <input type="submit" value="Poista" class="action-button" />
+            </form>
+          </td>
         </tr>
       </table>
     </div>
+    <script th:if="${error}">
+      setTimeout(function () {
+        window.location.href = "/valmistajat";
+      }, 3000); // 3000 milliseconds = 3 seconds
+    </script>
   </body>
 </html>
