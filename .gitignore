@@ -31,5 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
-harjoituskanta.mv.db
-harjoituskanta.trace.db
+harjoituskanta.mv.db  # Added to ignore list
